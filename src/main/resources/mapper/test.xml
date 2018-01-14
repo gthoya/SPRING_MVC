@@ -3,6 +3,7 @@
 <mapper namespace="test">
     <select id="test" resultType="String">
         SELECT  data
-        FROM    test
+        FROM    test.test
+        LIMIT   1
     </select>
 </mapper>
