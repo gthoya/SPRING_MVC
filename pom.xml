@@ -222,7 +222,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <parallel>classes</parallel>
-                    <argLine>-Xms512m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=1024m</argLine>
+                    <argLine>-Xms1024m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=1024m</argLine>
                     <testFailureIgnore>true</testFailureIgnore>
                     <threadCount>8</threadCount>
                     <testFailureIgnore>true</testFailureIgnore>
