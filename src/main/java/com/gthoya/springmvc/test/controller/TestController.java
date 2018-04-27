@@ -16,9 +16,9 @@ public class TestController {
     @RequestMapping("test")
     public ModelAndView test() {
         ModelAndView mav = new ModelAndView("test");
-
+        log.debug("###################### test before #######################");
         mav.addObject("test", testService.test());
-        log.debug("###################### test #######################");
+        log.debug("###################### test after #######################");
         return mav;
     }
 }
