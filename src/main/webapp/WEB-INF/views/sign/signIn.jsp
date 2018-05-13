@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>sign in</title>
     <script type="text/javascript" src="resources/js/jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
