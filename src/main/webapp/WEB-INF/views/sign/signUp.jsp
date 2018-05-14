@@ -28,16 +28,18 @@
     </script>
 </head>
 <body>
-    <div>
-        <label>ID</label>
-        <input type="text" id="userId" style="width: 120px"/>
-    </div>
-    <div>
-        <label>Password</label>
-        <input type="password" id="password" style="width: 120px"/>
-    </div>
     <div style="text-align: center">
-        <input type="button" id="signIn" value="회원가입">
+        <div>
+            <label>ID</label>
+            <input type="text" id="userId" style="width: 120px"/>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" id="password" style="width: 120px"/>
+        </div>
+        <div>
+            <input type="button" id="signIn" value="회원가입">
+        </div>
     </div>
 </body>
 </html>
