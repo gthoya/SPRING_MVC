@@ -40,7 +40,6 @@ public class DataSourceConfiguration {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = resolver.getResources("classpath*:mapper/**/*.xml");
         sqlSessionFactory.setMapperLocations(resources);
-        sqlSessionFactory.setTypeAliasesPackage("com.gthoya.springmvc.sign.model");
 
         return sqlSessionFactory;
     }
