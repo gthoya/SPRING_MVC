@@ -1,4 +1,4 @@
-package com.gthoya.springmvc.sign.model;
+package com.gthoya.application.sign.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.gthoya.springmvc.aspect;
+package com.gthoya.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 @Slf4j
 public class TimeLoggingAspect {
-    @Around("execution(public * com.gthoya.springmvc..dao.*DAO.*(..))")
+    @Around("execution(public * com.gthoya.application..dao.*DAO.*(..))")
     public Object executeQueryTimeLog(ProceedingJoinPoint joinpoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         log.debug("###################### start time = {} ######################", startTime);

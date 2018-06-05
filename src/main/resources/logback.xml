@@ -9,7 +9,7 @@
     </appender>
 
     <logger name="org.springframework" level="info" />
-    <logger name="com.gthoya.springmvc" level="debug" />
+    <logger name="com.gthoya.application" level="debug" />
     <root level="info">
         <appender-ref ref="console" />
     </root>

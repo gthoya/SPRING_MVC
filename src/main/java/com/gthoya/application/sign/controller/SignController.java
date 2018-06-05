@@ -1,7 +1,7 @@
-package com.gthoya.springmvc.sign.controller;
+package com.gthoya.application.sign.controller;
 
-import com.gthoya.springmvc.sign.model.User;
-import com.gthoya.springmvc.sign.service.SignService;
+import com.gthoya.application.sign.model.User;
+import com.gthoya.application.sign.service.SignService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

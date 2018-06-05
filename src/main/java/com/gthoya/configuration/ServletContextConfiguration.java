@@ -1,4 +1,4 @@
-package com.gthoya.springmvc.configuration;
+package com.gthoya.configuration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@ComponentScan(basePackages = "com.gthoya.springmvc", includeFilters = @Filter(Controller.class))
+@ComponentScan(basePackages = "com.gthoya.application", includeFilters = @Filter(Controller.class))
 @Configuration
 @EnableWebMvc
 public class ServletContextConfiguration extends WebMvcConfigurerAdapter {

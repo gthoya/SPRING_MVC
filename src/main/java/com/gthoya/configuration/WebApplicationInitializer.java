@@ -1,4 +1,4 @@
-package com.gthoya.springmvc.configuration;
+package com.gthoya.configuration;
 
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;

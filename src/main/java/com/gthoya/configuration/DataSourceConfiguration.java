@@ -1,4 +1,4 @@
-package com.gthoya.springmvc.configuration;
+package com.gthoya.configuration;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;

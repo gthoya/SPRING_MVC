@@ -1,6 +1,6 @@
-package com.gthoya.springmvc.sign.dao;
+package com.gthoya.application.sign.dao;
 
-import com.gthoya.springmvc.sign.model.User;
+import com.gthoya.application.sign.model.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

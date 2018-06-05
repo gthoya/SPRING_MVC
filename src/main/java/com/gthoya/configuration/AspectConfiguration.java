@@ -1,6 +1,6 @@
-package com.gthoya.springmvc.configuration;
+package com.gthoya.configuration;
 
-import com.gthoya.springmvc.aspect.TimeLoggingAspect;
+import com.gthoya.aspect.TimeLoggingAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
