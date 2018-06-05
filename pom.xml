@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gthoya</groupId>
-    <artifactId>springmvc</artifactId>
-    <name>spring_mvc</name>
+    <artifactId>spring-application</artifactId>
+    <name>spring-application</name>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <properties>
