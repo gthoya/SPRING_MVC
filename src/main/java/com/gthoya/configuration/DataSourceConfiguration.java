@@ -14,10 +14,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource("classpath:jdbc.properties")
 public class DataSourceConfiguration {
     @Value("${jdbc.driverClassName}")
@@ -87,7 +89,7 @@ public class DataSourceConfiguration {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
-    @Bean
+    @Bean()
     public PlatformTransactionManager txManager() throws Exception {
         return new DataSourceTransactionManager(dataSource());
     }
