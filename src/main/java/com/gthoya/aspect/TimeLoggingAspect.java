@@ -8,12 +8,12 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 @Slf4j
 public class TimeLoggingAspect {
-    @Around("execution(public * com.gthoya.application..dao.*DAO.*(..))")
-    public Object executeQueryTimeLog(ProceedingJoinPoint joinpoint) throws Throwable {
+    @Around("execution(public * com.gthoya.application..*DAO.*(..))")
+    public Object executeQueryTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         log.debug("###################### start time = {} ######################", startTime);
 
-        Object obj = joinpoint.proceed();
+        Object obj = joinPoint.proceed();
 
         long endTime = System.currentTimeMillis();
         log.debug("###################### end time = {} ######################", endTime);

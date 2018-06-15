@@ -6,8 +6,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -16,23 +18,54 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
+@PropertySource("classpath:jdbc.properties")
 public class DataSourceConfiguration {
+    @Value("${jdbc.driverClassName}")
+    private String driverClassName;
+
+    @Value("${jdbc.url}")
+    private String url;
+
+    @Value("${jdbc.userName}")
+    private String userName;
+
+    @Value("${jdbc.password}")
+    private String password;
+
+    @Value("${jdbc.initialSize}")
+    private int initialSize;
+
+    @Value("${jdbc.minIdle}")
+    private int minIdle;
+
+    @Value("${jdbc.maxIdle}")
+    private int maxIdle;
+
+    @Value("${jdbc.maxActive}")
+    private int maxActive;
+
+    @Value("${jdbc.validationQuery}")
+    private String validationQuery;
+
+    @Value("${jdbc.validationQueryTimeOut}")
+    private int validationQueryTimeOut;
+
     @Autowired
     private CryptComponent cryptComponent;
 
     @Bean
     public DataSource dataSource() throws Exception {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/test");
-        dataSource.setUsername("develop");
-        dataSource.setPassword(cryptComponent.decrypt("a/cIo2ocNnSROmj5xY13Nw=="));
-        dataSource.setInitialSize(1);
-        dataSource.setMinIdle(1);
-        dataSource.setMaxIdle(3);
-        dataSource.setMaxActive(5);
-        dataSource.setValidationQuery("select 1");
-        dataSource.setValidationQueryTimeout(100);
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(url);
+        dataSource.setUsername(userName);
+        dataSource.setPassword(cryptComponent.decrypt(password));
+        dataSource.setInitialSize(initialSize);
+        dataSource.setMinIdle(minIdle);
+        dataSource.setMaxIdle(maxIdle);
+        dataSource.setMaxActive(maxActive);
+        dataSource.setValidationQuery(validationQuery);
+        dataSource.setValidationQueryTimeout(validationQueryTimeOut);
 
         return dataSource;
     }
