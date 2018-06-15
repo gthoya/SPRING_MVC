@@ -19,7 +19,7 @@ public class WebApplicationInitializer implements org.springframework.web.WebApp
         servletContext.addListener(listener);
 
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(ApplicationContextConfiguration.class, DataSourceConfiguration.class, AspectConfiguration.class);
+        applicationContext.register(ApplicationContextConfiguration.class, AspectConfiguration.class, DataSourceConfiguration.class);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(applicationContext);
 
