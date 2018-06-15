@@ -18,9 +18,10 @@ public class CryptComponent {
         byte[] keyBytes = new byte[16];
         byte[] b = this.iv.getBytes("UTF-8");
         int len = b.length;
-        if(len > keyBytes.length){
+        if (len > keyBytes.length) {
             len = keyBytes.length;
         }
+
         System.arraycopy(b, 0, keyBytes, 0, len);
         SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
 

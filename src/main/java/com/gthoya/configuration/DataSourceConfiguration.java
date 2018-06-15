@@ -90,7 +90,7 @@ public class DataSourceConfiguration {
     }
 
     @Bean()
-    public PlatformTransactionManager txManager() throws Exception {
+    public PlatformTransactionManager transactionManager() throws Exception {
         return new DataSourceTransactionManager(dataSource());
     }
 }
