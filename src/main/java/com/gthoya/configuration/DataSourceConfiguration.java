@@ -89,7 +89,7 @@ public class DataSourceConfiguration {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
-    @Bean()
+    @Bean
     public PlatformTransactionManager transactionManager() throws Exception {
         return new DataSourceTransactionManager(dataSource());
     }

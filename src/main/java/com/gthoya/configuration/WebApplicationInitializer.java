@@ -1,34 +1,30 @@
 package com.gthoya.configuration;
 
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
+import javax.servlet.Filter;
 
-public class WebApplicationInitializer implements org.springframework.web.WebApplicationInitializer {
+public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
-    public void onStartup(ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext servletApplicationContext = new AnnotationConfigWebApplicationContext();
-        servletApplicationContext.register(ServletContextConfiguration.class);
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[] {ApplicationContextConfiguration.class, AspectConfiguration.class, DataSourceConfiguration.class };
+    }
 
-        ContextLoaderListener listener = new ContextLoaderListener(servletApplicationContext);
-        servletContext.addListener(listener);
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[] {ServletContextConfiguration.class };
+    }
 
-        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(ApplicationContextConfiguration.class, AspectConfiguration.class, DataSourceConfiguration.class);
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] { "/" };
+    }
 
-        DispatcherServlet dispatcherServlet = new DispatcherServlet(applicationContext);
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter("UTF-8", true, true);
 
-        ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", dispatcherServlet);
-        servlet.setLoadOnStartup(1);
-        servlet.addMapping("/");
-
-        FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
-        filter.setInitParameter("encoding", "UTF-8");
-        filter.addMappingForServletNames(null, false, "dispatcher");
+        return new Filter[] { characterEncodingFilter };
     }
 }
