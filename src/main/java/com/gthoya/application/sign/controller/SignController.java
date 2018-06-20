@@ -29,16 +29,20 @@ public class SignController {
     @PostMapping("signUp")
     @ResponseBody
     public User signUp(User param) {
+        User user = new User();
+
+
+        if (validateParam(param, user)) {
+            return user;
+        }
+
         try {
-            String result = signService.makeUser(param);
-            if (StringUtils.isNotEmpty(result)) {
-                param.setMessage(result);
-            }
+            user.setMessage(signService.makeUser(param));
         } catch (Exception e) {
             log.error("sign up fail - {}", param.getUserId());
         }
 
-        return param;
+        return user;
     }
 
     @GetMapping("signInPage")
@@ -50,6 +54,11 @@ public class SignController {
     @ResponseBody
     public User signIn(User param) {
         User user = new User();
+
+        if (validateParam(param, user)) {
+            return user;
+        }
+
         try {
             user = signService.getUser(param);
         } catch (Exception e) {
@@ -57,5 +66,17 @@ public class SignController {
         }
 
         return user;
+    }
+
+    private boolean validateParam(User param, User user) {
+        if (StringUtils.isEmpty(param.getUserId())) {
+            user.setMessage("user id is empty");
+            return true;
+        } else if (StringUtils.isEmpty(param.getPassword())) {
+            user.setMessage("password is empty");
+            return true;
+        }
+
+        return false;
     }
 }

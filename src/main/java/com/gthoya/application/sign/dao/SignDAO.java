@@ -10,7 +10,11 @@ public class SignDAO extends SqlSessionDaoSupport {
         return getSqlSession().insert("sign.insertUser", param);
     }
 
-    public User selectUser(User param) {
-        return getSqlSession().selectOne("sign.selectUser", param);
+    public User selectUserWithPassword(User param) {
+        return getSqlSession().selectOne("sign.selectUserWithPassword", param);
+    }
+
+    public User selectUserWithoutPassword(User param) {
+        return getSqlSession().selectOne("sign.selectUserWithoutPassword", param);
     }
 }

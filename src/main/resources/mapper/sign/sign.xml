@@ -6,13 +6,17 @@
         VALUES (#{userId}, #{password})
     </insert>
 
-    <select id="selectUser" resultType="com.gthoya.application.sign.model.User">
+    <select id="selectUserWithPassword" resultType="com.gthoya.application.sign.model.User">
         SELECT  id, user_id AS userId
         FROM    test.user
         WHERE   user_id = #{userId}
-        <if test='password != null and password != ""'>
         AND     password = #{password}
         AND     withdrawal_date = '0000-00-00 00:00:00'
-        </if>
+    </select>
+
+    <select id="selectUserWithoutPassword" resultType="com.gthoya.application.sign.model.User">
+        SELECT  id, user_id AS userId
+        FROM    test.user
+        WHERE   user_id = #{userId}
     </select>
 </mapper>
