@@ -17,7 +17,7 @@ public class SignController {
     private SignService signService;
 
     @GetMapping("main")
-    public String getSignOut() {
+    public String getMainPage() {
         return "main/main";
     }
 
