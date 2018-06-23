@@ -36,7 +36,7 @@ public class SignControllerTest {
 
         assertEquals(signController.signUp(param).getMessage(), "user id is empty");
 
-        verify(signService, never()).makeUser(param);
+        verify(signService, never()).createUser(param);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class SignControllerTest {
 
         assertEquals(signController.signUp(param).getMessage(), "password is empty");
 
-        verify(signService, never()).makeUser(param);
+        verify(signService, never()).createUser(param);
     }
 
     @Test
@@ -55,11 +55,11 @@ public class SignControllerTest {
         param.setUserId("test");
         param.setPassword("test");
 
-        when(signService.makeUser(param)).thenReturn("success");
+        when(signService.createUser(param)).thenReturn("success");
 
         assertEquals(signController.signUp(param).getMessage(), "success");
 
-        verify(signService, times(1)).makeUser(param);
+        verify(signService, times(1)).createUser(param);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class SignControllerTest {
 
         assertEquals(signController.signIn(param).getMessage(), "user id is empty");
 
-        verify(signService, never()).makeUser(param);
+        verify(signService, never()).createUser(param);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class SignControllerTest {
 
         assertEquals(signController.signIn(param).getMessage(), "password is empty");
 
-        verify(signService, never()).makeUser(param);
+        verify(signService, never()).createUser(param);
     }
 
     @Test

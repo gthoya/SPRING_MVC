@@ -37,7 +37,7 @@ public class SignController {
         }
 
         try {
-            user.setMessage(signService.makeUser(param));
+            user.setMessage(signService.createUser(param));
         } catch (Exception e) {
             log.error("sign up fail - {}", param.getUserId());
         }

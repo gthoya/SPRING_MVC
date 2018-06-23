@@ -1,5 +1,6 @@
 package com.gthoya.application.sign.service;
 
+import com.gthoya.application.constant.CommonConstant;
 import com.gthoya.application.sign.dao.SignDAO;
 import com.gthoya.application.sign.model.User;
 import com.gthoya.application.util.CryptComponent;
@@ -17,7 +18,7 @@ public class SignService {
     @Autowired
     private SignDAO signDAO;
 
-    public String makeUser(User param) {
+    public String createUser(User param) {
         try {
             param.setPassword(cryptComponent.encrypt(param.getPassword()));
         } catch (Exception e) {
@@ -34,7 +35,7 @@ public class SignService {
             return "sign up fail";
         }
 
-        return "success";
+        return CommonConstant.SUCCESS;
     }
 
     public User getUser(User param) {
@@ -56,7 +57,7 @@ public class SignService {
             return result;
         }
 
-        result.setMessage("success");
+        result.setMessage(CommonConstant.SUCCESS);
         return result;
     }
 }
