@@ -12,6 +12,6 @@ public class BoardController {
 
     @RequestMapping("/")
     public String getBoardListForm() {
-
+        return "";
     }
 }
