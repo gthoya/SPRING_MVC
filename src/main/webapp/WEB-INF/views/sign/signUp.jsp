@@ -16,6 +16,9 @@
                 var param = {
                     userId : $("#userId").val()
                     , password : $("#password").val()
+                    , name : $("#name").val()
+                    , age : $("#age").val()
+                    , gender : $("#gender").val()
                 }
 
                 $.post("/signUp", param, signUpCallback);
@@ -36,6 +39,21 @@
         <div>
             <label>Password</label>
             <input type="password" id="password" style="width: 120px"/>
+        </div>
+        <div>
+            <label>name</label>
+            <input type="text" id="name" style="width: 120px"/>
+        </div>
+        <div>
+            <label>age</label>
+            <input type="text" id="age" style="width: 120px"/>
+        </div>
+        <div>
+            <label>gender</label>
+            <select id="gender" style="width: 120px">
+                <option value="M">male</option>
+                <option value="F">female</option>
+            </select>
         </div>
         <div>
             <input type="button" id="signIn" value="회원가입">

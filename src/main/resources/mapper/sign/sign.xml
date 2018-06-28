@@ -11,7 +11,7 @@
         FROM    test.user
         WHERE   user_id = #{userId}
         AND     password = #{password}
-        AND     withdrawal_date = '0000-00-00 00:00:00'
+        AND     withdrawal_dt = '0000-00-00 00:00:00'
     </select>
 
     <select id="selectUserWithoutPassword" resultType="com.gthoya.application.sign.model.User">
