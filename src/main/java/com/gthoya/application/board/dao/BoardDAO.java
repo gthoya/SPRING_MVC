@@ -1,6 +1,6 @@
 package com.gthoya.application.board.dao;
 
-import com.gthoya.application.board.model.Board;
+import com.gthoya.application.board.model.Contents;
 import com.gthoya.configuration.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -8,19 +8,23 @@ import java.util.List;
 
 @Repository
 public class BoardDAO extends SqlSessionDaoSupport {
-    public int insertBoard(Board board) {
-        return getSqlSession().insert("board.insertBoard", board);
+    public int insertContents(Contents contents) {
+        return getSqlSession().insert("board.insertContents", contents);
     }
 
-    public int updateBoard(Board board) {
-        return getSqlSession().update("board.updateBoard", board);
+    public int updateContents(Contents contents) {
+        return getSqlSession().update("board.updateContents", contents);
     }
 
-    public List<Board> selectBoardList(Board board) {
-        return getSqlSession().selectList("board.selectBoard", board);
+    public int updateUnusedContents(Contents contents) {
+        return getSqlSession().update("board.updateUnusedContents", contents);
     }
 
-    public Board selectBoard(Board board) {
-        return getSqlSession().selectOne("board.selectBoard", board);
+    public List<Contents> selectContentsList(Contents contents) {
+        return getSqlSession().selectList("board.selectContents", contents);
+    }
+
+    public Contents selectContents(Contents contents) {
+        return getSqlSession().selectOne("board.selectContents", contents);
     }
 }

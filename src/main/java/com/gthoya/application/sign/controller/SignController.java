@@ -16,7 +16,7 @@ public class SignController {
     @Autowired
     private SignService signService;
 
-    @GetMapping("main")
+    @GetMapping(value = {"", "main"})
     public String getMainPage() {
         return "main/main";
     }

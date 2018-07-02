@@ -5,13 +5,13 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class Board {
+public class Contents {
     private long id;
     private String title;
     private String contents;
     private String useYn;
-    private LocalDateTime createDateTime;
+    private String createDateTime;
     private long createUser;
-    private LocalDateTime updateDateTime;
+    private String updateDateTime;
     private long updateUser;
 }

@@ -1,7 +1,7 @@
 package com.gthoya.application.board.service;
 
 import com.gthoya.application.board.dao.BoardDAO;
-import com.gthoya.application.board.model.Board;
+import com.gthoya.application.board.model.Contents;
 import com.gthoya.application.constant.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,27 +13,34 @@ public class BoardService {
     @Autowired
     private BoardDAO boardDAO;
 
-    public String createBoard(Board board) {
-        if (boardDAO.insertBoard(board) == 1) {
+    public String createContents(Contents contents) {
+        if (boardDAO.insertContents(contents) == 1) {
+            return CommonConstant.SUCCESS;
+        }
+
+        return CommonConstant.FAIL;
+    }
+    public String modifyContents(Contents contents) {
+        if (boardDAO.updateContents(contents) == 1) {
             return CommonConstant.SUCCESS;
         }
 
         return CommonConstant.FAIL;
     }
 
-    public String modifyBoard(Board board) {
-        if (boardDAO.updateBoard(board) == 1) {
+    public String unusedContents(Contents contents) {
+        if (boardDAO.updateUnusedContents(contents) == 1) {
             return CommonConstant.SUCCESS;
         }
 
         return CommonConstant.FAIL;
     }
 
-    public List<Board> getBoardList(Board board) {
-        return boardDAO.selectBoardList(board);
+    public List<Contents> getContentsList(Contents contents) {
+        return boardDAO.selectContentsList(contents);
     }
 
-    public Board getBoard(Board board) {
-        return boardDAO.selectBoard(board);
+    public Contents getContents(Contents contents) {
+        return boardDAO.selectContents(contents);
     }
 }
