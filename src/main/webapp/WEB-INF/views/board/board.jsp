@@ -18,10 +18,10 @@
 </head>
 <body>
     <div style="width: 100%;">
-        <div style="float: left; width: 5%;">no</div>
-        <div style="float: left; width: 65%;">제목</div>
-        <div style="float: left; width: 15%;">작성일시</div>
-        <div style="float: left; width: 15%;">작성자</div>
+        <div style="float: left; border: 1px solid black; width: 5%;">no</div>
+        <div style="float: left; border: 1px solid black; border-left: 0px; width: 60%;">제목</div>
+        <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">작성일시</div>
+        <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">작성자</div>
     </div>
     <div id="contentsList" />
 </body>
