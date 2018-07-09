@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
     <insert id="insertContents" parameterType="com.gthoya.application.board.model.Contents">
-        INSERT INTO board(title, contents, create_user)
-        VALUES (#{title}, #{contents}, #{createUser})
+        INSERT INTO board(title, contents_body, create_user)
+        VALUES (#{title}, #{contentsBody}, #{createUser})
     </insert>
 
     <update id="updateContents" parameterType="com.gthoya.application.board.model.Contents">
         UPDATE  board
         SET     title = #{title}
-        ,       contents = #{contents}
+        ,       contents_body = #{contentsBody}
         ,       update_user = #{updateUser}
         ,       update_dt = now()
         WHERE   id = #{id}
     </update>
 
-    <update id="updateUnUsedContents" parameterType="com.gthoya.application.board.model.Contents">
+    <update id="updateUnusedContents" parameterType="com.gthoya.application.board.model.Contents">
         UPDATE  board
         SET     use_yn = 'N'
         WHERE   id = #{id}
@@ -24,7 +24,7 @@
     <select id="selectContents" resultType="com.gthoya.application.board.model.Contents">
         SELECT  id
         ,       title
-        ,       contents
+        ,       contents_body AS contentsBody
         ,       use_yn AS useYn
         ,       create_dt AS createDateTime
         ,       create_user AS createUser

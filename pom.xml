@@ -286,6 +286,11 @@
                         <exclude>**/test/*Test.java</exclude>
                         <exclude>**/test/**/*Test.java</exclude>
                         <exclude>**/suite/*Tests.java</exclude>
+                        <exclude>**/dao/*DAO.java</exclude>
+                        <exclude>**/model/*.java</exclude>
+                        <exclude>**/constant/*.java</exclude>
+                        <exclude>**/configuration/*.java</exclude>
+                        <exclude>**/aspect/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
