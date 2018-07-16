@@ -1,9 +1,12 @@
 package com.gthoya.configuration;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
 
 public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -24,7 +27,15 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
     @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter("UTF-8", true, true);
+        MultipartFilter multipartFilter = new MultipartFilter();
 
-        return new Filter[] { characterEncodingFilter };
+        return new Filter[] { characterEncodingFilter, multipartFilter };
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        MultipartConfigElement multipartConfig = new MultipartConfigElement("/Users/kakao/workspace/", 1048576, 10485760, 0);
+
+        registration.setMultipartConfig(multipartConfig);
     }
 }

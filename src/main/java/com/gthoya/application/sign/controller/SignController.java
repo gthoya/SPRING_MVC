@@ -1,5 +1,6 @@
 package com.gthoya.application.sign.controller;
 
+import com.gthoya.application.constant.CommonConstant;
 import com.gthoya.application.sign.model.User;
 import com.gthoya.application.sign.service.SignService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,7 @@ public class SignController {
             user.setMessage(signService.createUser(param));
         } catch (Exception e) {
             log.error("sign up fail - {}", param.getUserId());
+            user.setMessage(CommonConstant.FAIL);
         }
 
         return user;
@@ -63,6 +65,7 @@ public class SignController {
             user = signService.getUser(param);
         } catch (Exception e) {
             log.error("sign in fail - {}", param.getUserId());
+            user.setMessage(CommonConstant.FAIL);
         }
 
         return user;

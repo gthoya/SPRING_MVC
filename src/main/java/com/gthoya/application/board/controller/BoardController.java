@@ -23,15 +23,6 @@ public class BoardController {
         return "board/board";
     }
 
-    @GetMapping("contentsList")
-    public ModelAndView getContentsList(Contents contents) {
-        ModelAndView mav = new ModelAndView("board/contentsList");
-
-        mav.addObject("contentsList", boardService.getContentsList(contents));
-
-        return mav;
-    }
-
     @PostMapping("contents/create")
     @ResponseBody
     public String createContents(Contents contents) {
@@ -63,6 +54,15 @@ public class BoardController {
             log.error("unused contents error", e);
             return CommonConstant.FAIL;
         }
+    }
+
+    @GetMapping("contentsList")
+    public ModelAndView getContentsList(Contents contents) {
+        ModelAndView mav = new ModelAndView("board/contentsList");
+
+        mav.addObject("contentsList", boardService.getContentsList(contents));
+
+        return mav;
     }
 
     @GetMapping("contents/{id}")

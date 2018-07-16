@@ -1,5 +1,6 @@
 package com.gthoya.application.sign.controller;
 
+import com.gthoya.application.constant.CommonConstant;
 import com.gthoya.application.sign.model.User;
 import com.gthoya.application.sign.service.SignService;
 import org.junit.Test;
@@ -14,13 +15,13 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class SignControllerTest {
     @InjectMocks
-    private SignController signController = new SignController();
+    private SignController signController;
 
     @Mock
     private SignService signService;
 
     @Test
-    public void testGetMainPage() {
+    public void testGetMainPage() throws Exception {
         assertEquals(signController.getMainPage(), "main/main");
     }
 
@@ -55,9 +56,22 @@ public class SignControllerTest {
         param.setUserId("test");
         param.setPassword("test");
 
-        when(signService.createUser(param)).thenReturn("success");
+        when(signService.createUser(param)).thenReturn(CommonConstant.SUCCESS);
 
-        assertEquals(signController.signUp(param).getMessage(), "success");
+        assertEquals(signController.signUp(param).getMessage(), CommonConstant.SUCCESS);
+
+        verify(signService, times(1)).createUser(param);
+    }
+
+    @Test
+    public void testSignUpWhenThrowsException() {
+        User param = new User();
+        param.setUserId("test");
+        param.setPassword("test");
+
+        when(signService.createUser(param)).thenThrow(Exception.class);
+
+        assertEquals(signController.signUp(param).getMessage(), CommonConstant.FAIL);
 
         verify(signService, times(1)).createUser(param);
     }
@@ -94,11 +108,27 @@ public class SignControllerTest {
         param.setPassword("test");
 
         User result = new User();
-        result.setMessage("success");
+        result.setMessage(CommonConstant.SUCCESS);
 
         when(signService.getUser(param)).thenReturn(result);
 
-        assertEquals(signController.signIn(param).getMessage(), "success");
+        assertEquals(signController.signIn(param).getMessage(), CommonConstant.SUCCESS);
+
+        verify(signService, times(1)).getUser(param);
+    }
+
+    @Test
+    public void testSignInWhenThrowsException() {
+        User param = new User();
+        param.setUserId("test");
+        param.setPassword("test");
+
+        User result = new User();
+        result.setMessage("success");
+
+        when(signService.getUser(param)).thenThrow(Exception.class);
+
+        assertEquals(signController.signIn(param).getMessage(), CommonConstant.FAIL);
 
         verify(signService, times(1)).getUser(param);
     }

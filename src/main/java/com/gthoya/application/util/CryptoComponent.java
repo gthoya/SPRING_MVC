@@ -9,11 +9,11 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 
 @Component
-public class CryptComponent {
+public class CryptoComponent {
     private String iv;
     private Key keySpec;
 
-    public CryptComponent() throws Exception {
+    public CryptoComponent() throws Exception {
         this.iv = "passwordqwertyui";
         byte[] keyBytes = new byte[16];
         byte[] b = this.iv.getBytes("UTF-8");

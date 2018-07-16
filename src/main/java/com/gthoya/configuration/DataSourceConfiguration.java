@@ -1,6 +1,6 @@
 package com.gthoya.configuration;
 
-import com.gthoya.application.util.CryptComponent;
+import com.gthoya.application.util.CryptoComponent;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -51,7 +51,7 @@ public class DataSourceConfiguration {
     private int validationQueryTimeOut;
 
     @Autowired
-    private CryptComponent cryptComponent;
+    private CryptoComponent cryptoComponent;
 
     @Bean
     public DataSource dataSource() throws Exception {
@@ -59,7 +59,7 @@ public class DataSourceConfiguration {
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
-        dataSource.setPassword(cryptComponent.decrypt(password));
+        dataSource.setPassword(cryptoComponent.decrypt(password));
         dataSource.setInitialSize(initialSize);
         dataSource.setMinIdle(minIdle);
         dataSource.setMaxIdle(maxIdle);
