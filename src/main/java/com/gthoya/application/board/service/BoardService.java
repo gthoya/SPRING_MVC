@@ -20,6 +20,7 @@ public class BoardService {
 
         return CommonConstant.FAIL;
     }
+
     public String modifyContents(Contents contents) {
         if (boardDAO.updateContents(contents) == 1) {
             return CommonConstant.SUCCESS;

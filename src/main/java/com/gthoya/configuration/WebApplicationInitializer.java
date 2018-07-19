@@ -16,7 +16,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { ServletContextConfiguration.class };
+        return new Class[] { AspectConfiguration.class, ServletContextConfiguration.class };
     }
 
     @Override
