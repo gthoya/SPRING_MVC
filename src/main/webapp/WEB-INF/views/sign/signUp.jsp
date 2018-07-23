@@ -9,7 +9,7 @@
                 var param = {
                     userId : $("#userId").val()
                     , password : $("#password").val()
-                    , name : $("#name").val()
+                    , userName : $("#userName").val()
                     , age : $("#age").val()
                     , gender : $("#gender").val()
                 }
@@ -20,6 +20,10 @@
 
         function signUpCallback(result) {
             alert(result.message)
+
+            if (result.message == "success") {
+                location.href = "/board"
+            }
         }
     </script>
 </head>
@@ -35,7 +39,7 @@
         </div>
         <div>
             <label>name</label>
-            <input type="text" id="name" style="width: 120px"/>
+            <input type="text" id="userName" style="width: 120px"/>
         </div>
         <div>
             <label>age</label>

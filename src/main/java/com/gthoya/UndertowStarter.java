@@ -33,7 +33,7 @@ public class UndertowStarter {
                 .addServletContainerInitializer(servletContainerInitializerInfo)
                 .setClassLoader(UndertowStarter.class.getClassLoader())
                 .setContextPath("/")
-                .setDeploymentName("story-app-web");
+                .setDeploymentName("spring-application");
 
         DeploymentManager manager = Servlets.defaultContainer().addDeployment(servletBuilder);
         manager.deploy();

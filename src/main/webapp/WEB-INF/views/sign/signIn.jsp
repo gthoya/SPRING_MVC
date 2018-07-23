@@ -19,11 +19,7 @@
             alert(result.message)
 
             if (result.message == "success") {
-                $("#user").text(result.userId + " 님 로그인 하셨습니다.")
-                $("#userDiv").visible(true)
-            } else {
-                $("#user").text("")
-                $("#userDiv").visible(false)
+                location.href = "/board"
             }
         }
     </script>
@@ -41,9 +37,6 @@
         <div>
             <input type="button" id="signIn" name="signIn" value="로그인">
         </div>
-    </div>
-    <div id="userDiv" style="text-align: center" visible="false">
-        <label id="user"></label>
     </div>
 </body>
 </html>

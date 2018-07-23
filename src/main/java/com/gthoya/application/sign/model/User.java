@@ -10,6 +10,7 @@ public class User {
     private String userName;
     private int age;
     private String gender;
+    private String createDate;
 
     private String message;
 }

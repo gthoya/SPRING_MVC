@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @Slf4j
 public class SignController {
@@ -29,7 +31,7 @@ public class SignController {
 
     @PostMapping("signUp")
     @ResponseBody
-    public User signUp(User param) {
+    public User signUp(HttpSession httpSession, User param) {
         User user = new User();
 
 
@@ -39,6 +41,7 @@ public class SignController {
 
         try {
             user.setMessage(signService.createUser(param));
+            makeSession(httpSession, param);
         } catch (Exception e) {
             log.error("sign up fail - {}", param.getUserId());
             user.setMessage(CommonConstant.FAIL);
@@ -54,7 +57,7 @@ public class SignController {
 
     @PostMapping("signIn")
     @ResponseBody
-    public User signIn(User param) {
+    public User signIn(HttpSession httpSession, User param) {
         User user = new User();
 
         if (!validateParam(param, user)) {
@@ -63,6 +66,7 @@ public class SignController {
 
         try {
             user = signService.getUser(param);
+            makeSession(httpSession, user);
         } catch (Exception e) {
             log.error("sign in fail - {}", param.getUserId());
             user.setMessage(CommonConstant.FAIL);
@@ -81,5 +85,17 @@ public class SignController {
         }
 
         return true;
+    }
+
+    private void makeSession(HttpSession httpSession, User user) {
+        if (!StringUtils.equals(user.getMessage(), CommonConstant.SUCCESS)) {
+            return;
+        }
+
+        if (httpSession.getAttribute(user.getUserId()) != null) {
+            httpSession.removeAttribute(user.getUserId());
+        }
+
+        httpSession.setAttribute(user.getUserId(), user);
     }
 }

@@ -11,13 +11,15 @@
         SET     title = #{title}
         ,       contents_body = #{contentsBody}
         ,       update_user = #{updateUser}
-        ,       update_dt = now()
+        ,       update_dt = NOW()
         WHERE   id = #{id}
     </update>
 
     <update id="updateUnusedContents" parameterType="com.gthoya.application.board.model.Contents">
         UPDATE  board
         SET     use_yn = 'N'
+        ,       update_dt = NOW()
+        ,       update_user = #{updateUser}
         WHERE   id = #{id}
     </update>
 

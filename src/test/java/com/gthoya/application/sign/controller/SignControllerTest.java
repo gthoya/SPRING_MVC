@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.mock.web.MockHttpSession;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -19,6 +20,9 @@ public class SignControllerTest {
 
     @Mock
     private SignService signService;
+
+    @Mock
+    private MockHttpSession mockHttpSession;
 
     @Test
     public void testGetMainPage() throws Exception {
@@ -35,7 +39,7 @@ public class SignControllerTest {
         User param = new User();
         param.setPassword("test");
 
-        assertEquals(signController.signUp(param).getMessage(), "user id is empty");
+        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "user id is empty");
 
         verify(signService, never()).createUser(param);
     }
@@ -45,7 +49,7 @@ public class SignControllerTest {
         User param = new User();
         param.setUserId("test");
 
-        assertEquals(signController.signUp(param).getMessage(), "password is empty");
+        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "password is empty");
 
         verify(signService, never()).createUser(param);
     }
@@ -58,7 +62,7 @@ public class SignControllerTest {
 
         when(signService.createUser(param)).thenReturn(CommonConstant.SUCCESS);
 
-        assertEquals(signController.signUp(param).getMessage(), CommonConstant.SUCCESS);
+        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), CommonConstant.SUCCESS);
 
         verify(signService, times(1)).createUser(param);
     }
@@ -71,7 +75,7 @@ public class SignControllerTest {
 
         when(signService.createUser(param)).thenThrow(Exception.class);
 
-        assertEquals(signController.signUp(param).getMessage(), CommonConstant.FAIL);
+        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), CommonConstant.FAIL);
 
         verify(signService, times(1)).createUser(param);
     }
@@ -86,7 +90,7 @@ public class SignControllerTest {
         User param = new User();
         param.setPassword("test");
 
-        assertEquals(signController.signIn(param).getMessage(), "user id is empty");
+        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), "user id is empty");
 
         verify(signService, never()).createUser(param);
     }
@@ -96,7 +100,7 @@ public class SignControllerTest {
         User param = new User();
         param.setUserId("test");
 
-        assertEquals(signController.signIn(param).getMessage(), "password is empty");
+        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), "password is empty");
 
         verify(signService, never()).createUser(param);
     }
@@ -112,7 +116,7 @@ public class SignControllerTest {
 
         when(signService.getUser(param)).thenReturn(result);
 
-        assertEquals(signController.signIn(param).getMessage(), CommonConstant.SUCCESS);
+        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), CommonConstant.SUCCESS);
 
         verify(signService, times(1)).getUser(param);
     }
@@ -128,7 +132,7 @@ public class SignControllerTest {
 
         when(signService.getUser(param)).thenThrow(Exception.class);
 
-        assertEquals(signController.signIn(param).getMessage(), CommonConstant.FAIL);
+        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), CommonConstant.FAIL);
 
         verify(signService, times(1)).getUser(param);
     }
