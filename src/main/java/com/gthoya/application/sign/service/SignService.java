@@ -20,18 +20,20 @@ public class SignService {
     public String createUser(User param) {
         try {
             param.setPassword(cryptoComponent.encrypt(param.getPassword()));
+
+            User user = signDAO.selectUserWithoutPassword(param);
+            if (user != null) {
+                return "user id already exists";
+            }
+
+            if (signDAO.insertUser(param) != 1) {
+                return "sign up fail";
+            }
+
+            param.setPassword(cryptoComponent.decrypt(param.getPassword()));
         } catch (Exception e) {
-            log.error("SignService.makeUser - password encrypt error", e);
-            return "password encrypt error";
-        }
-
-        User user = signDAO.selectUserWithoutPassword(param);
-        if (user != null) {
-            return "user id already exists";
-        }
-
-        if (signDAO.insertUser(param) != 1) {
-            return "sign up fail";
+            log.error("SignService.makeUser - password encrypt or decrypt error", e);
+            return "password encrypt or decrypt error";
         }
 
         return CommonConstant.SUCCESS;

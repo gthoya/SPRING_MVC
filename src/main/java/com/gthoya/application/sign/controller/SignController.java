@@ -35,7 +35,7 @@ public class SignController {
     public User signUp(HttpSession httpSession, User param) {
         User user = new User();
 
-        if (!validateParam(param, user)) {
+        if (!validateParam4SignUp(param, user)) {
             return user;
         }
 
@@ -47,7 +47,6 @@ public class SignController {
             }
 
             user = signIn(httpSession, param);
-            makeSession(httpSession, user);
         } catch (Exception e) {
             log.error("sign up fail - {}", param.getUserId());
             user.setMessage(CommonConstant.FAIL);
@@ -66,7 +65,7 @@ public class SignController {
     public User signIn(HttpSession httpSession, User param) {
         User user = new User();
 
-        if (!validateParam(param, user)) {
+        if (!validateParam4SignIn(param, user)) {
             return user;
         }
 
@@ -81,7 +80,24 @@ public class SignController {
         return user;
     }
 
-    private boolean validateParam(User param, User user) {
+    private boolean validateParam4SignUp(User param, User user) {
+        if (!validateParam4SignIn(param, user)) {
+            return false;
+        } else if (StringUtils.isEmpty(param.getUserName())) {
+            user.setMessage("user name is empty");
+            return false;
+        } else if (param.getAge() == 0) {
+            user.setMessage("age is empty");
+            return false;
+        } else if (StringUtils.isEmpty(param.getGender())) {
+            user.setMessage("gender is empty");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validateParam4SignIn(User param, User user) {
         if (StringUtils.isEmpty(param.getUserId())) {
             user.setMessage("user id is empty");
             return false;
@@ -106,7 +122,7 @@ public class SignController {
     }
 
     @GetMapping("/signOut")
-    public String logout(HttpSession session) {
+    public String signOut(HttpSession session) {
         session.removeAttribute(HttpSessionUtils.USER_SESSION_KEY);
 
         return getMainPage();

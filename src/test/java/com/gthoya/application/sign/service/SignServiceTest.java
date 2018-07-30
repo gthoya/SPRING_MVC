@@ -80,7 +80,7 @@ public class SignServiceTest {
 
         when(cryptoComponent.encrypt(anyString())).thenThrow(Exception.class);
 
-        assertEquals(signService.createUser(param), "password encrypt error");
+        assertEquals(signService.createUser(param), "password encrypt or decrypt error");
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
         verify(signDAO, never()).selectUserWithoutPassword(param);

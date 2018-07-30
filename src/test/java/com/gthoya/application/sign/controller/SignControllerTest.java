@@ -37,7 +37,6 @@ public class SignControllerTest {
     @Test
     public void testSignUpWithoutUserId() {
         User param = new User();
-        param.setPassword("test");
 
         assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "user id is empty");
 
@@ -55,16 +54,60 @@ public class SignControllerTest {
     }
 
     @Test
-    public void testSignUp() {
+    public void testSignUpWithoutUserName() {
         User param = new User();
         param.setUserId("test");
         param.setPassword("test");
 
+        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "user name is empty");
+
+        verify(signService, never()).createUser(param);
+    }
+
+    @Test
+    public void testSignUpWithoutAge() {
+        User param = new User();
+        param.setUserId("test");
+        param.setPassword("test");
+        param.setUserName("test");
+
+        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "age is empty");
+
+        verify(signService, never()).createUser(param);
+    }
+
+    @Test
+    public void testSignUpWithoutGender() {
+        User param = new User();
+        param.setUserId("test");
+        param.setPassword("test");
+        param.setUserName("test");
+        param.setAge(10);
+
+        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "gender is empty");
+
+        verify(signService, never()).createUser(param);
+    }
+
+    @Test
+    public void testSignUp() {
+        User param = new User();
+        param.setUserId("test");
+        param.setPassword("test");
+        param.setUserName("test");
+        param.setAge(10);
+        param.setGender("M");
+
+        User result = new User();
+        result.setMessage(CommonConstant.SUCCESS);
+
         when(signService.createUser(param)).thenReturn(CommonConstant.SUCCESS);
+        when(signService.getUser(param)).thenReturn(result);
 
         assertEquals(signController.signUp(mockHttpSession, param).getMessage(), CommonConstant.SUCCESS);
 
         verify(signService, times(1)).createUser(param);
+        verify(signService, times(1)).getUser(param);
     }
 
     @Test
@@ -72,6 +115,9 @@ public class SignControllerTest {
         User param = new User();
         param.setUserId("test");
         param.setPassword("test");
+        param.setUserName("test");
+        param.setAge(10);
+        param.setGender("M");
 
         when(signService.createUser(param)).thenThrow(Exception.class);
 
@@ -88,7 +134,6 @@ public class SignControllerTest {
     @Test
     public void testSignInWithoutUserId() {
         User param = new User();
-        param.setPassword("test");
 
         assertEquals(signController.signIn(mockHttpSession, param).getMessage(), "user id is empty");
 
@@ -135,5 +180,10 @@ public class SignControllerTest {
         assertEquals(signController.signIn(mockHttpSession, param).getMessage(), CommonConstant.FAIL);
 
         verify(signService, times(1)).getUser(param);
+    }
+
+    @Test
+    public void testSignOut() {
+        assertEquals(signController.signOut(mockHttpSession), "main/main");
     }
 }
