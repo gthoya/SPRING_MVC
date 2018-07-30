@@ -1,9 +1,9 @@
 package com.gthoya.application.sign.service;
 
-import com.gthoya.application.constant.CommonConstant;
+import com.gthoya.constant.CommonConstant;
 import com.gthoya.application.sign.dao.SignDAO;
 import com.gthoya.application.sign.model.User;
-import com.gthoya.application.util.CryptoComponent;
+import com.gthoya.util.CryptoComponent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.gthoya.application.util;
+package com.gthoya.util;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;

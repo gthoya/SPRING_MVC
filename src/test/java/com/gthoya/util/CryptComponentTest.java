@@ -1,4 +1,4 @@
-package com.gthoya.application.util;
+package com.gthoya.util;
 
 import org.junit.Assert;
 import org.junit.Before;

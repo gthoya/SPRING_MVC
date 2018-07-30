@@ -14,17 +14,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UndertowStarter {
-    private static Undertow server;
     // private static final Semaphore semaphore = new Semaphore(0);
 
     public static void main(String[] ar) throws Exception {
         UndertowStarter undertowStarter = new UndertowStarter();
-        undertowStarter.configureUndertow();
-        server.start();
+        undertowStarter.getUndertowServer().start();
         // semaphore.acquire();
     }
 
-    private void configureUndertow() throws ServletException {
+    private Undertow getUndertowServer() throws ServletException {
         Set<Class<?>> handlers = new HashSet<Class<?>>();
         handlers.add(WebApplicationInitializer.class);
         ServletContainerInitializerInfo servletContainerInitializerInfo = new ServletContainerInitializerInfo(SpringServletContainerInitializer.class, handlers);
@@ -41,7 +39,7 @@ public class UndertowStarter {
         PathHandler path = Handlers.path(Handlers.redirect(servletBuilder.getContextPath()))
                 .addPrefixPath(servletBuilder.getContextPath(), manager.start());
 
-        server = Undertow.builder()
+        return Undertow.builder()
                 .addHttpListener(System.getProperty("server.port") == null ? 8080 : Integer.parseInt(System.getProperty("server.port")), "localhost")
                 .setHandler(path).build();
     }

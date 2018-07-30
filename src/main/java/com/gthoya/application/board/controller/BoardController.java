@@ -1,8 +1,10 @@
 package com.gthoya.application.board.controller;
 
+import com.gthoya.annotation.LoginCheck;
 import com.gthoya.application.board.model.Contents;
 import com.gthoya.application.board.service.BoardService;
-import com.gthoya.application.constant.CommonConstant;
+import com.gthoya.constant.CommonConstant;
+import com.gthoya.application.sign.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +21,13 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("board")
-    public String getBoardPage() {
+    public String getBoardPage(User user) {
         return "board/board";
     }
 
     @PostMapping("contents/create")
     @ResponseBody
-    public String createContents(Contents contents) {
+    public String createContents(@LoginCheck User user, Contents contents) {
         try {
             return boardService.createContents(contents);
         } catch (Exception e) {
@@ -36,7 +38,7 @@ public class BoardController {
 
     @PostMapping("contents/modify")
     @ResponseBody
-    public String modifyContents(Contents contents) {
+    public String modifyContents(@LoginCheck User user, Contents contents) {
         try {
             return boardService.modifyContents(contents);
         } catch (Exception e) {
@@ -47,7 +49,7 @@ public class BoardController {
 
     @PostMapping("contents/unused/{id}")
     @ResponseBody
-    public String unusedContents(@PathVariable long id) {
+    public String unusedContents(@LoginCheck User user, @PathVariable long id) {
         try {
             return boardService.unusedContents(new Contents(id));
         } catch (Exception e) {
@@ -66,7 +68,7 @@ public class BoardController {
     }
 
     @GetMapping("contents/{id}")
-    public ModelAndView getContents(@PathVariable long id) {
+    public ModelAndView getContents(User user, @PathVariable long id) {
         ModelAndView mav = new ModelAndView("board/contents");
         Contents result = boardService.getContents(new Contents(id));
 

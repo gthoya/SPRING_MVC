@@ -1,6 +1,6 @@
 package com.gthoya.application.sign.controller;
 
-import com.gthoya.application.constant.CommonConstant;
+import com.gthoya.constant.CommonConstant;
 import com.gthoya.application.sign.model.User;
 import com.gthoya.application.sign.service.SignService;
 import org.junit.Test;

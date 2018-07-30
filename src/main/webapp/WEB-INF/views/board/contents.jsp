@@ -26,7 +26,7 @@
 
         function createContents() {
             var param = {
-                title : $("#contentsTitle").val()
+                title : $("#contentusersTitle").val()
                 , contentsBody : $("#contentsBody").val()
             }
 

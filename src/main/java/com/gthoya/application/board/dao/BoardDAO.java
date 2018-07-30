@@ -1,7 +1,7 @@
 package com.gthoya.application.board.dao;
 
 import com.gthoya.application.board.model.Contents;
-import com.gthoya.application.util.SqlSessionDaoSupport;
+import com.gthoya.util.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

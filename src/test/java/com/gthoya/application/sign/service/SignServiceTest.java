@@ -1,9 +1,9 @@
 package com.gthoya.application.sign.service;
 
-import com.gthoya.application.constant.CommonConstant;
+import com.gthoya.constant.CommonConstant;
 import com.gthoya.application.sign.dao.SignDAO;
 import com.gthoya.application.sign.model.User;
-import com.gthoya.application.util.CryptoComponent;
+import com.gthoya.util.CryptoComponent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

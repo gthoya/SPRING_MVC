@@ -1,4 +1,4 @@
-package com.gthoya.application.constant;
+package com.gthoya.constant;
 
 public class CommonConstant {
     public static final String SUCCESS = "success";

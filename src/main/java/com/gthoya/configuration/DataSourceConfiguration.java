@@ -1,6 +1,6 @@
 package com.gthoya.configuration;
 
-import com.gthoya.application.util.CryptoComponent;
+import com.gthoya.util.CryptoComponent;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

@@ -2,7 +2,7 @@ package com.gthoya.application.board.service;
 
 import com.gthoya.application.board.dao.BoardDAO;
 import com.gthoya.application.board.model.Contents;
-import com.gthoya.application.constant.CommonConstant;
+import com.gthoya.constant.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

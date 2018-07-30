@@ -2,7 +2,7 @@ package com.gthoya.application.board.controller;
 
 import com.gthoya.application.board.model.Contents;
 import com.gthoya.application.board.service.BoardService;
-import com.gthoya.application.constant.CommonConstant;
+import com.gthoya.constant.CommonConstant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,14 +24,14 @@ public class BoardControllerTest {
 
     @Test
     public void testGetBoardPage() {
-        assertEquals(boardController.getBoardPage(), "board/board");
+        assertEquals(boardController.getBoardPage(anyObject()), "board/board");
     }
 
     @Test
     public void testCreateContents() {
         when(boardService.createContents(anyObject())).thenReturn(CommonConstant.SUCCESS);
 
-        assertEquals(boardController.createContents(anyObject()), CommonConstant.SUCCESS);
+        assertEquals(boardController.createContents(anyObject(), anyObject()), CommonConstant.SUCCESS);
 
         verify(boardService, times(1)).createContents(anyObject());
     }
@@ -40,7 +40,7 @@ public class BoardControllerTest {
     public void testCreateContentsWhenThrowsException() {
         when(boardService.createContents(anyObject())).thenThrow(Exception.class);
 
-        assertEquals(boardController.createContents(anyObject()), CommonConstant.FAIL);
+        assertEquals(boardController.createContents(anyObject(), anyObject()), CommonConstant.FAIL);
 
         verify(boardService, times(1)).createContents(anyObject());
     }
@@ -49,7 +49,7 @@ public class BoardControllerTest {
     public void testModifyContents() {
         when(boardService.modifyContents(anyObject())).thenReturn(CommonConstant.SUCCESS);
 
-        boardController.modifyContents(anyObject());
+        boardController.modifyContents(anyObject(), anyObject());
 
         verify(boardService, times(1)).modifyContents(anyObject());
     }
@@ -58,7 +58,7 @@ public class BoardControllerTest {
     public void testModifyContentsWhenThrowsException() {
         when(boardService.modifyContents(anyObject())).thenThrow(Exception.class);
 
-        boardController.modifyContents(anyObject());
+        boardController.modifyContents(anyObject(), anyObject());
 
         verify(boardService, times(1)).modifyContents(anyObject());
     }
@@ -67,7 +67,7 @@ public class BoardControllerTest {
     public void testUnusedContents() {
         when(boardService.unusedContents(anyObject())).thenReturn(CommonConstant.SUCCESS);
 
-        boardController.unusedContents(1L);
+        boardController.unusedContents(anyObject(), 1L);
 
         verify(boardService, times(1)).unusedContents(anyObject());
     }
@@ -76,7 +76,7 @@ public class BoardControllerTest {
     public void testUnusedContentsWhenThrowsException() {
         when(boardService.unusedContents(anyObject())).thenThrow(Exception.class);
 
-        boardController.unusedContents(1L);
+        boardController.unusedContents(anyObject(), 1L);
 
         verify(boardService, times(1)).unusedContents(anyObject());
     }
@@ -94,7 +94,7 @@ public class BoardControllerTest {
     public void testGetContentsWhenReturnIsNull() {
         when(boardService.getContents(anyObject())).thenReturn(null);
 
-        assertEquals(boardController.getContents(1L).getViewName(), "board/contents");
+        assertEquals(boardController.getContents(anyObject(), 1L).getViewName(), "board/contents");
 
         verify(boardService, times(1)).getContents(anyObject());
     }
@@ -103,7 +103,7 @@ public class BoardControllerTest {
     public void testGetContentsWhenReturnIsNotNull() {
         when(boardService.getContents(anyObject())).thenReturn(new Contents());
 
-        assertEquals(boardController.getContents(1L).getViewName(), "board/contents");
+        assertEquals(boardController.getContents(anyObject(), 1L).getViewName(), "board/contents");
 
         verify(boardService, times(1)).getContents(anyObject());
     }

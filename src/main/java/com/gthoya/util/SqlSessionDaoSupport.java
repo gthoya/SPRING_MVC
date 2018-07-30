@@ -1,4 +1,4 @@
-package com.gthoya.application.util;
+package com.gthoya.util;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;

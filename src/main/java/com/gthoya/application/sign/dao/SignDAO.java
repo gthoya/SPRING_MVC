@@ -1,7 +1,7 @@
 package com.gthoya.application.sign.dao;
 
 import com.gthoya.application.sign.model.User;
-import com.gthoya.application.util.SqlSessionDaoSupport;
+import com.gthoya.util.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 @Repository

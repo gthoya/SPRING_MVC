@@ -1,5 +1,11 @@
 package com.gthoya;
 
+import com.gthoya.configuration.ApplicationContextConfiguration;
+import com.gthoya.configuration.AspectConfiguration;
+import com.gthoya.configuration.DataSourceConfiguration;
+import com.gthoya.configuration.ServletContextConfiguration;
+import com.gthoya.configuration.WebApplicationInitializer;
+import org.apache.jasper.servlet.JspServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -20,23 +26,36 @@ public class JettyStarter {
 
     private ServletContextHandler getServletContextHandler() throws Exception {
         ServletContextHandler servletContextHandler = new ServletContextHandler();
-        servletContextHandler.setResourceBase("webapp");
         servletContextHandler.setContextPath("/");
+        servletContextHandler.setResourceBase("webapp");
 
-        WebApplicationContext webApplicationContext = getWebApplicationContext();
+        servletContextHandler.setClassLoader(
+                Thread.currentThread().getContextClassLoader()
+        );
 
-        DispatcherServlet dispatcherServlet = new DispatcherServlet(webApplicationContext);
-        ServletHolder springServletHolder = new ServletHolder("spring-application", dispatcherServlet);
-        servletContextHandler.addServlet(springServletHolder, "/");
-        servletContextHandler.addEventListener(new ContextLoaderListener(webApplicationContext));
+        servletContextHandler.addServlet(new ServletHolder(new DispatcherServlet(getServletContext())), "/*");
+        servletContextHandler.addEventListener(new ContextLoaderListener(getContextLoaderListenerContext()));
+
+        ServletHolder servletHolder = servletContextHandler.addServlet(JspServlet.class, "*.jsp");
+        servletHolder.setInitParameter("classpath", servletContextHandler.getClassPath());
 
         return servletContextHandler;
     }
 
-    private WebApplicationContext getWebApplicationContext() {
-        AnnotationConfigWebApplicationContext webAppInitializer = new AnnotationConfigWebApplicationContext();
-        webAppInitializer.setConfigLocation("com.gthoya.configuration");
+    private WebApplicationContext getServletContext() {
+        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+        context.register(WebApplicationInitializer.class);
+        context.register(ServletContextConfiguration.class);
 
-        return webAppInitializer;
+        return context;
+    }
+
+    private WebApplicationContext getContextLoaderListenerContext() {
+        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+        context.register(ApplicationContextConfiguration.class);
+        context.register(DataSourceConfiguration.class);
+        context.register(AspectConfiguration.class);
+
+        return context;
     }
 }
