@@ -10,8 +10,10 @@ public class Contents {
     private String useYn;
     private String createDateTime;
     private long createUser;
+    private String createUserName;
     private String updateDateTime;
     private long updateUser;
+    private String updateUserName;
 
     public Contents() {
 

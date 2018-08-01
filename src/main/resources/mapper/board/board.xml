@@ -10,8 +10,8 @@
         UPDATE  board
         SET     title = #{title}
         ,       contents_body = #{contentsBody}
-        ,       update_user = #{updateUser}
         ,       update_dt = NOW()
+        ,       update_user = #{updateUser}
         WHERE   id = #{id}
     </update>
 
@@ -24,19 +24,25 @@
     </update>
 
     <select id="selectContents" resultType="com.gthoya.application.board.model.Contents">
-        SELECT  id
-        ,       title
-        ,       contents_body AS contentsBody
-        ,       use_yn AS useYn
-        ,       create_dt AS createDateTime
-        ,       create_user AS createUser
-        ,       update_dt AS updateDateTime
-        ,       update_user AS updateUser
-        FROM    board
-        WHERE   use_yn = 'Y'
+        SELECT  b.id
+        ,       b.title
+        ,       b.contents_body AS contentsBody
+        ,       b.use_yn AS useYn
+        ,       b.create_dt AS createDateTime
+        ,       b.create_user AS createUser
+        ,       u1.user_name AS createUserName
+        ,       b.update_dt AS updateDateTime
+        ,       b.update_user AS updateUser
+        ,       u2.user_name AS updateUserName
+        FROM    board b
+        LEFT JOIN user u1
+        ON      b.create_user = u1.id
+        LEFT JOIN user u2
+        ON      b.update_user = u2.id
+        WHERE   b.use_yn = 'Y'
         <if test='id != null and id != ""'>
-          AND   id = #{id}
+          AND   b.id = #{id}
         </if>
-        ORDER BY create_dt DESC
+        ORDER BY b.create_dt DESC
     </select>
 </mapper>

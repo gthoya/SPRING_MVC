@@ -26,7 +26,7 @@
 
         function createContents() {
             var param = {
-                title : $("#contentusersTitle").val()
+                title : $("#contentsTitle").val()
                 , contentsBody : $("#contentsBody").val()
             }
 
@@ -76,7 +76,7 @@
             <input type="text" id="contentsTitle" value="${contents.title}">
         </div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createDateTime}</div>
-        <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createUser}</div>
+        <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createUserName}</div>
     </div>
     <div style="width: 100%; height: 50%;">
         <textarea id="contentsBody" style="width: 100%; height: 100%;">${contents.contentsBody}</textarea>

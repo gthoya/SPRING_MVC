@@ -23,7 +23,7 @@ import org.springframework.web.servlet.view.JstlView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@ComponentScan(basePackages = "com.gthoya", includeFilters = @Filter(Controller.class))
+@ComponentScan(basePackages = "com.gthoya", includeFilters = @Filter(Controller.class), useDefaultFilters = false)
 @EnableWebMvc
 public class ServletContextConfiguration extends WebMvcConfigurerAdapter {
     @Override

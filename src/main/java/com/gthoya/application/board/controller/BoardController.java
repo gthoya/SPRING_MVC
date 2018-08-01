@@ -29,6 +29,7 @@ public class BoardController {
     @ResponseBody
     public String createContents(@LoginCheck User user, Contents contents) {
         try {
+            contents.setCreateUser(user.getId());
             return boardService.createContents(contents);
         } catch (Exception e) {
             log.error("create contents error", e);
@@ -40,6 +41,7 @@ public class BoardController {
     @ResponseBody
     public String modifyContents(@LoginCheck User user, Contents contents) {
         try {
+            contents.setUpdateUser(user.getId());
             return boardService.modifyContents(contents);
         } catch (Exception e) {
             log.error("modify contents error", e);
@@ -51,7 +53,9 @@ public class BoardController {
     @ResponseBody
     public String unusedContents(@LoginCheck User user, @PathVariable long id) {
         try {
-            return boardService.unusedContents(new Contents(id));
+            Contents contents = new Contents(id);
+            contents.setUpdateUser(user.getId());
+            return boardService.unusedContents(contents);
         } catch (Exception e) {
             log.error("unused contents error", e);
             return CommonConstant.FAIL;

@@ -15,7 +15,7 @@
         <deploy.dir>deploy</deploy.dir>
         <build.war.name>ROOT</build.war.name>
         <org.springframework.version>4.3.13.RELEASE</org.springframework.version>
-        <org.aspectj.version>1.8.13</org.aspectj.version>
+        <org.aspectj.version>1.9.1</org.aspectj.version>
         <jackson.version>2.5.1</jackson.version>
         <jackson.asl.version>1.9.12</jackson.asl.version>
         <logback.version>1.2.3</logback.version>
