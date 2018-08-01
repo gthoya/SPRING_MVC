@@ -32,7 +32,7 @@ public class BoardControllerTest {
     public void testCreateContents() {
         when(boardService.createContents(anyObject())).thenReturn(CommonConstant.SUCCESS);
 
-        assertEquals(boardController.createContents(new User(), anyObject()), CommonConstant.SUCCESS);
+        assertEquals(boardController.createContents(new User(), new Contents()), CommonConstant.SUCCESS);
 
         verify(boardService, times(1)).createContents(anyObject());
     }
@@ -41,7 +41,7 @@ public class BoardControllerTest {
     public void testCreateContentsWhenThrowsException() {
         when(boardService.createContents(anyObject())).thenThrow(Exception.class);
 
-        assertEquals(boardController.createContents(new User(), anyObject()), CommonConstant.FAIL);
+        assertEquals(boardController.createContents(new User(), new Contents()), CommonConstant.FAIL);
 
         verify(boardService, times(1)).createContents(anyObject());
     }
@@ -50,7 +50,7 @@ public class BoardControllerTest {
     public void testModifyContents() {
         when(boardService.modifyContents(anyObject())).thenReturn(CommonConstant.SUCCESS);
 
-        assertEquals(boardController.modifyContents(new User(), anyObject()), CommonConstant.SUCCESS);
+        assertEquals(boardController.modifyContents(new User(), new Contents()), CommonConstant.SUCCESS);
 
         verify(boardService, times(1)).modifyContents(anyObject());
     }
@@ -59,7 +59,7 @@ public class BoardControllerTest {
     public void testModifyContentsWhenThrowsException() {
         when(boardService.modifyContents(anyObject())).thenThrow(Exception.class);
 
-        assertEquals(boardController.modifyContents(new User(), anyObject()), CommonConstant.FAIL);
+        assertEquals(boardController.modifyContents(new User(), new Contents()), CommonConstant.FAIL);
 
         verify(boardService, times(1)).modifyContents(anyObject());
     }

@@ -3,6 +3,7 @@ package com.gthoya.application.board.service;
 import com.gthoya.application.board.dao.BoardDAO;
 import com.gthoya.application.board.model.Contents;
 import com.gthoya.constant.CommonConstant;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
