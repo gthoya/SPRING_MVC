@@ -9,6 +9,20 @@
                 getContents(-1)
             })
 
+            $("#btnSignUp").on("click", function() {
+                location.href = "/signUp"
+            })
+
+            $("#btnSignIn").on("click", function() {
+                location.href = "/signIn"
+            })
+
+            $("#btnSignOut").on("click", function() {
+                if (confirm("로그아웃 할거야?")) {
+                    $.get("/signOut", null, location.reload())
+                }
+            })
+
 
             var param = {}
 
@@ -26,7 +40,14 @@
 </head>
 <body>
     <div style="text-align: right; width: 100%;">
-        <button id="btnCreate">등록</button>
+        <c:if test="${not empty userId}">
+            <button id="btnCreate">등록</button>
+            <button id="btnSignOut">로그아웃</button>
+        </c:if>
+        <c:if test="${empty userId}">
+            <button id="btnSignIn">로그인</button>
+            <button id="btnSignUp">회원가입</button>
+        </c:if>
     </div>
     <div style="width: 100%;">
         <div style="float: left; border: 1px solid black; width: 5%;">no</div>

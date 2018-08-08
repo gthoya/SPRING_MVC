@@ -6,6 +6,7 @@ import com.gthoya.application.board.service.BoardService;
 import com.gthoya.constant.CommonConstant;
 import com.gthoya.application.sign.model.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,22 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("board")
-    public String getBoardPage(User user) {
-        return "board/board";
+    @GetMapping(value = {"", "board"})
+    public ModelAndView getBoardPage(@LoginCheck(required = false) User user) {
+        ModelAndView mav = new ModelAndView("board/board");
+
+        mav.addObject("userId", (user != null ? user.getId() : StringUtils.EMPTY));
+
+        return mav;
+    }
+
+    @GetMapping("contentsList")
+    public ModelAndView getContentsList(Contents contents) {
+        ModelAndView mav = new ModelAndView("board/contentsList");
+
+        mav.addObject("contentsList", boardService.getContentsList(contents));
+
+        return mav;
     }
 
     @PostMapping("contents/create")
@@ -62,21 +76,13 @@ public class BoardController {
         }
     }
 
-    @GetMapping("contentsList")
-    public ModelAndView getContentsList(Contents contents) {
-        ModelAndView mav = new ModelAndView("board/contentsList");
-
-        mav.addObject("contentsList", boardService.getContentsList(contents));
-
-        return mav;
-    }
-
     @GetMapping("contents/{id}")
-    public ModelAndView getContents(User user, @PathVariable long id) {
+    public ModelAndView getContents(@LoginCheck(required = false) User user, @PathVariable long id) {
         ModelAndView mav = new ModelAndView("board/contents");
         Contents result = boardService.getContents(new Contents(id));
 
-        mav.addObject("contents", (result == null ? new Contents() : result));
+        mav.addObject("userId", (user != null ? user.getId() : StringUtils.EMPTY));
+        mav.addObject("contents", (result != null ? result : new Contents()));
 
         return mav;
     }

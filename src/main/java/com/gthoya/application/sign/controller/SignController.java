@@ -20,11 +20,6 @@ public class SignController {
     @Autowired
     private SignService signService;
 
-    @GetMapping(value = {"", "main"})
-    public String getMainPage() {
-        return "main/main";
-    }
-
     @GetMapping("signUp")
     public String getSignUpPage() {
         return "sign/signUp";
@@ -122,9 +117,7 @@ public class SignController {
     }
 
     @GetMapping("/signOut")
-    public String signOut(HttpSession session) {
+    public void signOut(HttpSession session) {
         session.removeAttribute(HttpSessionUtils.USER_SESSION_KEY);
-
-        return getMainPage();
     }
 }

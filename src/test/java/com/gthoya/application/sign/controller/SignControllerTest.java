@@ -25,11 +25,6 @@ public class SignControllerTest {
     private MockHttpSession mockHttpSession;
 
     @Test
-    public void testGetMainPage() throws Exception {
-        assertEquals(signController.getMainPage(), "main/main");
-    }
-
-    @Test
     public void testGetSignUpPage() {
         assertEquals(signController.getSignUpPage(), "sign/signUp");
     }
@@ -184,6 +179,6 @@ public class SignControllerTest {
 
     @Test
     public void testSignOut() {
-        assertEquals(signController.signOut(mockHttpSession), "main/main");
+        signController.signOut(mockHttpSession);
     }
 }

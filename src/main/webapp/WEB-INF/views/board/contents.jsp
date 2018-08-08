@@ -63,7 +63,7 @@
         <c:if test="${contents.id eq 0}">
             <button id="btnCreate">등록</button>
         </c:if>
-        <c:if test="${contents.id ne 0}">
+        <c:if test="${contents.id ne 0 && userId eq contents.createUser}">
             <button id="btnModify">수정</button>
             <button id="btnDelete">삭제</button>
         </c:if>

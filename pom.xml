@@ -19,7 +19,7 @@
         <jackson.version>2.5.1</jackson.version>
         <jackson.asl.version>1.9.12</jackson.asl.version>
         <logback.version>1.2.3</logback.version>
-        <tomcat.version>9.0.10</tomcat.version>
+        <tomcat.version>8.0.53</tomcat.version>
         <undertow.version>2.0.10.Final</undertow.version>
         <jetty.version>9.4.0.M1</jetty.version>
     </properties>
@@ -342,11 +342,11 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <excludes>
                         <exclude>**/test/**/*Test.java</exclude>
-                        <exclude>**/dao/**/*DAO.java</exclude>
-                        <exclude>**/model/**/*.java</exclude>
-                        <exclude>**/constant/**/*.java</exclude>
-                        <exclude>**/configuration/**/*.java</exclude>
-                        <exclude>**/aspect/**/*.java</exclude>
+                        <exclude>**/dao/*DAO.java</exclude>
+                        <exclude>**/model/*.java</exclude>
+                        <exclude>**/constant/*.java</exclude>
+                        <exclude>**/configuration/*.java</exclude>
+                        <exclude>**/aspect/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

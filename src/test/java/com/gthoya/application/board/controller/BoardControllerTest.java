@@ -25,7 +25,16 @@ public class BoardControllerTest {
 
     @Test
     public void testGetBoardPage() {
-        assertEquals(boardController.getBoardPage(new User()), "board/board");
+        assertEquals(boardController.getBoardPage(new User()).getViewName(), "board/board");
+    }
+
+    @Test
+    public void testGetContentsList() {
+        when(boardService.getContentsList(anyObject())).thenReturn(new ArrayList<Contents>());
+
+        assertEquals(boardController.getContentsList(anyObject()).getViewName(), "board/contentsList");
+
+        verify(boardService, times(1)).getContentsList(anyObject());
     }
 
     @Test
@@ -80,15 +89,6 @@ public class BoardControllerTest {
         assertEquals(boardController.unusedContents(new User(), 1L), CommonConstant.FAIL);
 
         verify(boardService, times(1)).unusedContents(anyObject());
-    }
-
-    @Test
-    public void testGetContentsList() {
-        when(boardService.getContentsList(anyObject())).thenReturn(new ArrayList<Contents>());
-
-        assertEquals(boardController.getContentsList(anyObject()).getViewName(), "board/contentsList");
-
-        verify(boardService, times(1)).getContentsList(anyObject());
     }
 
     @Test
