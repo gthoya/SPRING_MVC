@@ -79,11 +79,11 @@ public class BoardServiceTest {
 
     @Test
     public void testGetContentsList() {
-        when(boardDAO.selectContentsList(anyObject())).thenReturn(new ArrayList<Contents>());
+        when(boardDAO.selectContentsList()).thenReturn(new ArrayList<Contents>());
 
-        boardService.getContentsList(anyObject());
+        boardService.getContentsList();
 
-        verify(boardDAO, times(1)).selectContentsList(anyObject());
+        verify(boardDAO, times(1)).selectContentsList();
     }
 
     @Test

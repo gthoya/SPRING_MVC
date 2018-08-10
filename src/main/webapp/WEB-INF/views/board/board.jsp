@@ -19,14 +19,11 @@
 
             $("#btnSignOut").on("click", function() {
                 if (confirm("로그아웃 할거야?")) {
-                    $.get("/signOut", null, location.reload())
+                    $.get("/signOut", location.reload())
                 }
             })
 
-
-            var param = {}
-
-            $.get("/contentsList", param, searchCallback)
+            $.get("/contentsList", searchCallback)
         });
 
         function searchCallback(result) {

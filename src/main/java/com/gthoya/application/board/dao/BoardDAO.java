@@ -20,8 +20,8 @@ public class BoardDAO extends SqlSessionDaoSupport {
         return getSqlSession().update("board.updateUnusedContents", contents);
     }
 
-    public List<Contents> selectContentsList(Contents contents) {
-        return getSqlSession().selectList("board.selectContents", contents);
+    public List<Contents> selectContentsList() {
+        return getSqlSession().selectList("board.selectContents");
     }
 
     public Contents selectContents(Contents contents) {

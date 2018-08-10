@@ -31,10 +31,10 @@ public class BoardController {
     }
 
     @GetMapping("contentsList")
-    public ModelAndView getContentsList(Contents contents) {
+    public ModelAndView getContentsList() {
         ModelAndView mav = new ModelAndView("board/contentsList");
 
-        mav.addObject("contentsList", boardService.getContentsList(contents));
+        mav.addObject("contentsList", boardService.getContentsList());
 
         return mav;
     }

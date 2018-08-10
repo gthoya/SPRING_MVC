@@ -37,8 +37,8 @@ public class BoardService {
         return CommonConstant.FAIL;
     }
 
-    public List<Contents> getContentsList(Contents contents) {
-        return boardDAO.selectContentsList(contents);
+    public List<Contents> getContentsList() {
+        return boardDAO.selectContentsList();
     }
 
     public Contents getContents(Contents contents) {
