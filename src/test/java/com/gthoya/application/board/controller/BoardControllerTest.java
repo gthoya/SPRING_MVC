@@ -30,11 +30,11 @@ public class BoardControllerTest {
 
     @Test
     public void testGetContentsList() {
-        when(boardService.getContentsList()).thenReturn(new ArrayList<Contents>());
+        when(boardService.getContentsList(anyObject())).thenReturn(new ArrayList<Contents>());
 
-        assertEquals(boardController.getContentsList().getViewName(), "board/contentsList");
+        assertEquals(boardController.getContentsList(anyObject()).getViewName(), "board/contentsList");
 
-        verify(boardService, times(1)).getContentsList();
+        verify(boardService, times(1)).getContentsList(anyObject());
     }
 
     @Test

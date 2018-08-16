@@ -25,22 +25,30 @@
         });
 
         function createContents() {
-            var param = {
+            if (!validateContents()) {
+                return
+            }
+
+            var params = {
                 title : $("#contentsTitle").val()
                 , contentsBody : $("#contentsBody").val()
             }
 
-            $.post("/contents/create", param, callback)
+            $.post("/contents/create", params, callback)
         }
 
         function modifyContents() {
-            var param = {
+            if (!validateContents()) {
+                return
+            }
+
+            var params = {
                 id : $("#contentsId").val()
                 , title : $("#contentsTitle").val()
                 , contentsBody : $("#contentsBody").val()
             }
 
-            $.post("/contents/modify", param, callback)
+            $.post("/contents/modify", params, callback)
         }
 
         function deleteContents() {
@@ -54,6 +62,18 @@
             } else {
                 alert("실패~")
             }
+        }
+
+        function validateContents() {
+            if ($("#contentsTitle").val() == "") {
+                alert("제목을 입력해")
+                return false
+            } else if ($("#contentsBody").val() == "") {
+                alert("내용을 입력해")
+                return false
+            }
+
+            return true
         }
     </script>
 </head>

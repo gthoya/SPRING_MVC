@@ -6,12 +6,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#signIn").on("click", function() {
-                var param = {
+                var params = {
                     userId : $("#userId").val()
                     , password : $("#password").val()
                 }
 
-                $.post("/signIn", param, signInCallback)
+                $.post("/signIn", params, signInCallback)
             })
         })
 

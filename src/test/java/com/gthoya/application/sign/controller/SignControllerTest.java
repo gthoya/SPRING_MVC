@@ -31,94 +31,94 @@ public class SignControllerTest {
 
     @Test
     public void testSignUpWithoutUserId() {
-        User param = new User();
+        User user = new User();
 
-        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "user id is empty");
+        assertEquals(signController.signUp(mockHttpSession, user).getMessage(), "user id is empty");
 
-        verify(signService, never()).createUser(param);
+        verify(signService, never()).createUser(user);
     }
 
     @Test
     public void testSignUpWithoutPassword() {
-        User param = new User();
-        param.setUserId("test");
+        User user = new User();
+        user.setUserId("test");
 
-        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "password is empty");
+        assertEquals(signController.signUp(mockHttpSession, user).getMessage(), "password is empty");
 
-        verify(signService, never()).createUser(param);
+        verify(signService, never()).createUser(user);
     }
 
     @Test
     public void testSignUpWithoutUserName() {
-        User param = new User();
-        param.setUserId("test");
-        param.setPassword("test");
+        User user = new User();
+        user.setUserId("test");
+        user.setPassword("test");
 
-        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "user name is empty");
+        assertEquals(signController.signUp(mockHttpSession, user).getMessage(), "user name is empty");
 
-        verify(signService, never()).createUser(param);
+        verify(signService, never()).createUser(user);
     }
 
     @Test
     public void testSignUpWithoutAge() {
-        User param = new User();
-        param.setUserId("test");
-        param.setPassword("test");
-        param.setUserName("test");
+        User user = new User();
+        user.setUserId("test");
+        user.setPassword("test");
+        user.setUserName("test");
 
-        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "age is empty");
+        assertEquals(signController.signUp(mockHttpSession, user).getMessage(), "age is empty");
 
-        verify(signService, never()).createUser(param);
+        verify(signService, never()).createUser(user);
     }
 
     @Test
     public void testSignUpWithoutGender() {
-        User param = new User();
-        param.setUserId("test");
-        param.setPassword("test");
-        param.setUserName("test");
-        param.setAge(10);
+        User user = new User();
+        user.setUserId("test");
+        user.setPassword("test");
+        user.setUserName("test");
+        user.setAge(10);
 
-        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), "gender is empty");
+        assertEquals(signController.signUp(mockHttpSession, user).getMessage(), "gender is empty");
 
-        verify(signService, never()).createUser(param);
+        verify(signService, never()).createUser(user);
     }
 
     @Test
     public void testSignUp() {
-        User param = new User();
-        param.setUserId("test");
-        param.setPassword("test");
-        param.setUserName("test");
-        param.setAge(10);
-        param.setGender("M");
+        User user = new User();
+        user.setUserId("test");
+        user.setPassword("test");
+        user.setUserName("test");
+        user.setAge(10);
+        user.setGender("M");
 
         User result = new User();
         result.setMessage(CommonConstant.SUCCESS);
 
-        when(signService.createUser(param)).thenReturn(CommonConstant.SUCCESS);
-        when(signService.getUser(param)).thenReturn(result);
+        when(signService.createUser(user)).thenReturn(CommonConstant.SUCCESS);
+        when(signService.getUser(user)).thenReturn(result);
 
-        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), CommonConstant.SUCCESS);
+        assertEquals(signController.signUp(mockHttpSession, user).getMessage(), CommonConstant.SUCCESS);
 
-        verify(signService, times(1)).createUser(param);
-        verify(signService, times(1)).getUser(param);
+        verify(signService, times(1)).createUser(user);
+        verify(signService, times(1)).getUser(user);
     }
 
     @Test
     public void testSignUpWhenThrowsException() {
-        User param = new User();
-        param.setUserId("test");
-        param.setPassword("test");
-        param.setUserName("test");
-        param.setAge(10);
-        param.setGender("M");
+        User user = new User();
+        user.setUserId("test");
+        user.setPassword("test");
+        user.setUserName("test");
+        user.setAge(10);
+        user.setGender("M");
 
-        when(signService.createUser(param)).thenThrow(Exception.class);
+        when(signService.createUser(user)).thenThrow(Exception.class);
 
-        assertEquals(signController.signUp(mockHttpSession, param).getMessage(), CommonConstant.FAIL);
+        assertEquals(signController.signUp(mockHttpSession, user).getMessage(), CommonConstant.FAIL);
 
-        verify(signService, times(1)).createUser(param);
+        verify(signService, times(1)).createUser(user);
     }
 
     @Test
@@ -128,53 +128,53 @@ public class SignControllerTest {
 
     @Test
     public void testSignInWithoutUserId() {
-        User param = new User();
+        User user = new User();
 
-        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), "user id is empty");
+        assertEquals(signController.signIn(mockHttpSession, user).getMessage(), "user id is empty");
 
-        verify(signService, never()).createUser(param);
+        verify(signService, never()).createUser(user);
     }
 
     @Test
     public void testSignInWithoutPassword() {
-        User param = new User();
-        param.setUserId("test");
+        User user = new User();
+        user.setUserId("test");
 
-        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), "password is empty");
+        assertEquals(signController.signIn(mockHttpSession, user).getMessage(), "password is empty");
 
-        verify(signService, never()).createUser(param);
+        verify(signService, never()).createUser(user);
     }
 
     @Test
     public void testSignIn() {
-        User param = new User();
-        param.setUserId("test");
-        param.setPassword("test");
+        User user = new User();
+        user.setUserId("test");
+        user.setPassword("test");
 
         User result = new User();
         result.setMessage(CommonConstant.SUCCESS);
 
-        when(signService.getUser(param)).thenReturn(result);
+        when(signService.getUser(user)).thenReturn(result);
 
-        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), CommonConstant.SUCCESS);
+        assertEquals(signController.signIn(mockHttpSession, user).getMessage(), CommonConstant.SUCCESS);
 
-        verify(signService, times(1)).getUser(param);
+        verify(signService, times(1)).getUser(user);
     }
 
     @Test
     public void testSignInWhenThrowsException() {
-        User param = new User();
-        param.setUserId("test");
-        param.setPassword("test");
+        User user = new User();
+        user.setUserId("test");
+        user.setPassword("test");
 
         User result = new User();
         result.setMessage("success");
 
-        when(signService.getUser(param)).thenThrow(Exception.class);
+        when(signService.getUser(user)).thenThrow(Exception.class);
 
-        assertEquals(signController.signIn(mockHttpSession, param).getMessage(), CommonConstant.FAIL);
+        assertEquals(signController.signIn(mockHttpSession, user).getMessage(), CommonConstant.FAIL);
 
-        verify(signService, times(1)).getUser(param);
+        verify(signService, times(1)).getUser(user);
     }
 
     @Test

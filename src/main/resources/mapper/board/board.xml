@@ -43,6 +43,12 @@
         <if test='id != null and id != ""'>
           AND   b.id = #{id}
         </if>
+        <if test='title != null and title != ""'>
+          AND   b.title like CONCAT('%', #{title}, '%')
+        </if>
+        <if test='contentsBody != null and contentsBody != ""'>
+          AND   b.contents_body like CONCAT('%', #{contentsBody}, '%')
+        </if>
         ORDER BY b.create_dt DESC
     </select>
 </mapper>

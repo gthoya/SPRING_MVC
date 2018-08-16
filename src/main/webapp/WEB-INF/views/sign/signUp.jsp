@@ -6,7 +6,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#signIn").on("click", function() {
-                var param = {
+                var params = {
                     userId : $("#userId").val()
                     , password : $("#password").val()
                     , userName : $("#userName").val()
@@ -14,7 +14,7 @@
                     , gender : $("#gender").val()
                 }
 
-                $.post("/signUp", param, signUpCallback)
+                $.post("/signUp", params, signUpCallback)
             })
         })
 

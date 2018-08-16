@@ -3,8 +3,8 @@ package com.gthoya.application.board.controller;
 import com.gthoya.annotation.LoginCheck;
 import com.gthoya.application.board.model.Contents;
 import com.gthoya.application.board.service.BoardService;
-import com.gthoya.constant.CommonConstant;
 import com.gthoya.application.sign.model.User;
+import com.gthoya.constant.CommonConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ public class BoardController {
     }
 
     @GetMapping("contentsList")
-    public ModelAndView getContentsList() {
+    public ModelAndView getContentsList(Contents contents) {
         ModelAndView mav = new ModelAndView("board/contentsList");
 
-        mav.addObject("contentsList", boardService.getContentsList());
+        mav.addObject("contentsList", boardService.getContentsList(contents));
 
         return mav;
     }

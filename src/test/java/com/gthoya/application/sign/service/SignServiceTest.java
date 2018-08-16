@@ -28,103 +28,103 @@ public class SignServiceTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        User param = new User();
-        param.setPassword(plainPassword);
+        User user = new User();
+        user.setPassword(plainPassword);
 
         when(cryptoComponent.encrypt(anyString())).thenReturn(encryptPassword);
-        when(signDAO.selectUserWithoutPassword(param)).thenReturn(null);
-        when(signDAO.insertUser(param)).thenReturn(1);
+        when(signDAO.selectUserWithoutPassword(user)).thenReturn(null);
+        when(signDAO.insertUser(user)).thenReturn(1);
 
-        assertEquals(signService.createUser(param), CommonConstant.SUCCESS);
+        assertEquals(signService.createUser(user), CommonConstant.SUCCESS);
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
-        verify(signDAO, times(1)).selectUserWithoutPassword(param);
-        verify(signDAO, times(1)).insertUser(param);
+        verify(signDAO, times(1)).selectUserWithoutPassword(user);
+        verify(signDAO, times(1)).insertUser(user);
     }
 
     @Test
     public void testCreateUserWhenUserIsAlreadyExists() throws Exception {
-        User param = new User();
-        param.setPassword(plainPassword);
+        User user = new User();
+        user.setPassword(plainPassword);
 
         when(cryptoComponent.encrypt(anyString())).thenReturn(encryptPassword);
-        when(signDAO.selectUserWithoutPassword(param)).thenReturn(new User());
+        when(signDAO.selectUserWithoutPassword(user)).thenReturn(new User());
 
-        assertEquals(signService.createUser(param), "user id already exists");
+        assertEquals(signService.createUser(user), "user id already exists");
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
-        verify(signDAO, times(1)).selectUserWithoutPassword(param);
-        verify(signDAO, never()).insertUser(param);
+        verify(signDAO, times(1)).selectUserWithoutPassword(user);
+        verify(signDAO, never()).insertUser(user);
     }
 
     @Test
     public void testCreateUserWhenSignUpIsFail() throws Exception {
-        User param = new User();
-        param.setPassword(plainPassword);
+        User user = new User();
+        user.setPassword(plainPassword);
 
         when(cryptoComponent.encrypt(anyString())).thenReturn(encryptPassword);
-        when(signDAO.selectUserWithoutPassword(param)).thenReturn(null);
-        when(signDAO.insertUser(param)).thenReturn(0);
+        when(signDAO.selectUserWithoutPassword(user)).thenReturn(null);
+        when(signDAO.insertUser(user)).thenReturn(0);
 
-        assertEquals(signService.createUser(param), "sign up fail");
+        assertEquals(signService.createUser(user), "sign up fail");
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
-        verify(signDAO, times(1)).selectUserWithoutPassword(param);
-        verify(signDAO, times(1)).insertUser(param);
+        verify(signDAO, times(1)).selectUserWithoutPassword(user);
+        verify(signDAO, times(1)).insertUser(user);
     }
 
     @Test
     public void testCreateUserWhenEncryptThrowsException() throws Exception {
-        User param = new User();
-        param.setPassword(plainPassword);
+        User user = new User();
+        user.setPassword(plainPassword);
 
         when(cryptoComponent.encrypt(anyString())).thenThrow(Exception.class);
 
-        assertEquals(signService.createUser(param), "password encrypt or decrypt error");
+        assertEquals(signService.createUser(user), "password encrypt or decrypt error");
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
-        verify(signDAO, never()).selectUserWithoutPassword(param);
-        verify(signDAO, never()).insertUser(param);
+        verify(signDAO, never()).selectUserWithoutPassword(user);
+        verify(signDAO, never()).insertUser(user);
     }
 
     @Test
     public void testGetUser() throws Exception {
-        User param = new User();
-        param.setPassword(plainPassword);
+        User user = new User();
+        user.setPassword(plainPassword);
 
         when(cryptoComponent.encrypt(anyString())).thenReturn(encryptPassword);
-        when(signDAO.selectUserWithPassword(param)).thenReturn(new User());
+        when(signDAO.selectUserWithPassword(user)).thenReturn(new User());
 
-        assertEquals(signService.getUser(param).getMessage(), CommonConstant.SUCCESS);
+        assertEquals(signService.getUser(user).getMessage(), CommonConstant.SUCCESS);
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
-        verify(signDAO, times(1)).selectUserWithPassword(param);
+        verify(signDAO, times(1)).selectUserWithPassword(user);
     }
 
     @Test
     public void testGetUserWhenUserIsNotExists() throws Exception {
-        User param = new User();
-        param.setPassword(plainPassword);
+        User user = new User();
+        user.setPassword(plainPassword);
 
         when(cryptoComponent.encrypt(anyString())).thenReturn(encryptPassword);
-        when(signDAO.selectUserWithPassword(param)).thenReturn(null);
+        when(signDAO.selectUserWithPassword(user)).thenReturn(null);
 
-        assertEquals(signService.getUser(param).getMessage(), "user not found (please check ID and password)");
+        assertEquals(signService.getUser(user).getMessage(), "user not found (please check ID and password)");
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
-        verify(signDAO, times(1)).selectUserWithPassword(param);
+        verify(signDAO, times(1)).selectUserWithPassword(user);
     }
 
     @Test
     public void testGetUserWhenEncryptThrowsException() throws Exception {
-        User param = new User();
-        param.setPassword(plainPassword);
+        User user = new User();
+        user.setPassword(plainPassword);
 
         when(cryptoComponent.encrypt(anyString())).thenThrow(Exception.class);
 
-        assertEquals(signService.getUser(param).getMessage(), "password encrypt error");
+        assertEquals(signService.getUser(user).getMessage(), "password encrypt error");
 
         verify(cryptoComponent, times(1)).encrypt(anyString());
-        verify(signDAO, never()).selectUserWithPassword(param);
+        verify(signDAO, never()).selectUserWithPassword(user);
     }
 }
