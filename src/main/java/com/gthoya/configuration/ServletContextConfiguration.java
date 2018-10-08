@@ -1,6 +1,7 @@
 package com.gthoya.configuration;
 
 import com.gthoya.argumentresolver.UserArgumentResolver;
+import com.gthoya.constant.CommonConstant;
 import com.gthoya.interceptor.SignInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +12,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Controller;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -67,6 +69,9 @@ public class ServletContextConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public MultipartResolver multipartResolver() {
-        return new StandardServletMultipartResolver();
+        MultipartResolver multipartResolver = new CommonsMultipartResolver();
+        ((CommonsMultipartResolver) multipartResolver).setDefaultEncoding(CommonConstant.DEFAULT_CHARSET);
+
+        return multipartResolver;
     }
 }

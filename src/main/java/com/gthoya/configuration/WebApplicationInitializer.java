@@ -1,5 +1,6 @@
 package com.gthoya.configuration;
 
+import com.gthoya.constant.CommonConstant;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -26,7 +27,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Filter[] getServletFilters() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter("UTF-8", true, true);
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter(CommonConstant.DEFAULT_CHARSET, true, true);
         MultipartFilter multipartFilter = new MultipartFilter();
 
         return new Filter[] { characterEncodingFilter, multipartFilter };

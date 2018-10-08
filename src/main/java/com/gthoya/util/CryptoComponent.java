@@ -1,5 +1,6 @@
 package com.gthoya.util;
 
+import com.gthoya.constant.CommonConstant;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class CryptoComponent {
     public CryptoComponent() throws Exception {
         this.iv = "passwordqwertyui";
         byte[] keyBytes = new byte[16];
-        byte[] b = this.iv.getBytes("UTF-8");
+        byte[] b = this.iv.getBytes(CommonConstant.DEFAULT_CHARSET);
         int len = b.length;
         if (len > keyBytes.length) {
             len = keyBytes.length;
@@ -31,7 +32,7 @@ public class CryptoComponent {
     public String encrypt(String str) throws Exception {
         Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
         c.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
-        byte[] encrypted = c.doFinal(str.getBytes("UTF-8"));
+        byte[] encrypted = c.doFinal(str.getBytes(CommonConstant.DEFAULT_CHARSET));
 
         return new String(Base64.encodeBase64(encrypted));
     }
@@ -41,6 +42,6 @@ public class CryptoComponent {
         c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
         byte[] byteStr = Base64.decodeBase64(str.getBytes());
 
-        return new String(c.doFinal(byteStr), "UTF-8");
+        return new String(c.doFinal(byteStr), CommonConstant.DEFAULT_CHARSET);
     }
 }

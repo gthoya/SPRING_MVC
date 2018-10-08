@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -44,6 +45,7 @@ public class BoardController {
     public String createContents(@LoginCheck User user, Contents contents) {
         try {
             contents.setCreateUser(user.getId());
+
             return boardService.createContents(contents);
         } catch (Exception e) {
             log.error("create contents error", e);
@@ -56,6 +58,7 @@ public class BoardController {
     public String modifyContents(@LoginCheck User user, Contents contents) {
         try {
             contents.setUpdateUser(user.getId());
+
             return boardService.modifyContents(contents);
         } catch (Exception e) {
             log.error("modify contents error", e);
@@ -69,6 +72,7 @@ public class BoardController {
         try {
             Contents contents = new Contents(id);
             contents.setUpdateUser(user.getId());
+
             return boardService.unusedContents(contents);
         } catch (Exception e) {
             log.error("unused contents error", e);
@@ -85,5 +89,16 @@ public class BoardController {
         mav.addObject("contents", (result != null ? result : new Contents()));
 
         return mav;
+    }
+
+    @PostMapping("/contents/upload/file")
+    @ResponseBody
+    public String uploadFile(MultipartFile attachFile) {
+        try {
+            return CommonConstant.SUCCESS;
+        } catch (Exception e) {
+            log.error("contents file upload error");
+            return CommonConstant.FAIL;
+        }
     }
 }

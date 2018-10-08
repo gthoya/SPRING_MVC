@@ -3,26 +3,42 @@
 <html>
 <head>
     <script type="text/javascript" src="/resources/js/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery/jquery.form.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#btnCreate").on("click", function() {
+            $("#btnCreate").on("click", function () {
                 if (window.confirm("등록 할거야?")) {
                     createContents()
                 }
             })
 
-            $("#btnModify").on("click", function() {
+            $("#btnModify").on("click", function () {
                 if (window.confirm("수정 할거야?")) {
                     modifyContents()
                 }
             })
 
-            $("#btnDelete").on("click", function() {
+            $("#btnDelete").on("click", function () {
                 if (window.confirm("삭제 할거야?")) {
                     deleteContents()
                 }
             })
-        });
+
+            $("#uploadFile").on("click", function () {
+                if (window.confirm("파일 업로드 할거야?")) {
+                    $.ajax({
+                        url: "/contents/upload/file"
+                        , type: 'POST'
+                        , data: uploadForm
+                        , processData: false
+                        , contentType: false
+                        , success: function (response) {
+                            window.alert(response)
+                        }
+                    })
+                }
+            })
+        }
 
         function createContents() {
             if (!validateContents()) {
@@ -97,6 +113,12 @@
         </div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createDateTime}</div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createUserName}</div>
+    </div>
+    <div style="width: 100%">
+        <form id="uploadForm" method="POST" action="/contents/upload/file" enctype="multipart/form-data">
+            <input type="file" id="attachFile" name="attachFile"/>
+            <button id="uploadFile" value="파일업로드"/>
+        </form>
     </div>
     <div style="width: 100%; height: 50%;">
         <textarea id="contentsBody" style="width: 100%; height: 100%;">${contents.contentsBody}</textarea>
