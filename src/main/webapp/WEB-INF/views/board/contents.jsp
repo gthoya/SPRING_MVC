@@ -14,6 +14,7 @@
 
             $("#btnModify").on("click", function () {
                 if (window.confirm("수정 할거야?")) {
+                    uploadFile()
                     modifyContents()
                 }
             })
@@ -23,22 +24,7 @@
                     deleteContents()
                 }
             })
-
-            $("#uploadFile").on("click", function () {
-                if (window.confirm("파일 업로드 할거야?")) {
-                    $.ajax({
-                        url: "/contents/upload/file"
-                        , type: 'POST'
-                        , data: uploadForm
-                        , processData: false
-                        , contentType: false
-                        , success: function (response) {
-                            window.alert(response)
-                        }
-                    })
-                }
-            })
-        }
+        })
 
         function createContents() {
             if (!validateContents()) {
@@ -106,19 +92,13 @@
     </div>
     <div style="width: 100%">
         <div style="float: left; border: 1px solid black; width: 5%">
-            <input type="text" id="contentsId" value="${contents.id}" readonly>
+            <input type="text" id="contentsId" value="${contents.id}" style="width: 100%" readonly>
         </div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 60%;">
-            <input type="text" id="contentsTitle" value="${contents.title}">
+            <input type="text" id="contentsTitle" value="${contents.title}" style="width: 100%">
         </div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createDateTime}</div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createUserName}</div>
-    </div>
-    <div style="width: 100%">
-        <form id="uploadForm" method="POST" action="/contents/upload/file" enctype="multipart/form-data">
-            <input type="file" id="attachFile" name="attachFile"/>
-            <button id="uploadFile" value="파일업로드"/>
-        </form>
     </div>
     <div style="width: 100%; height: 50%;">
         <textarea id="contentsBody" style="width: 100%; height: 100%;">${contents.contentsBody}</textarea>

@@ -1,11 +1,9 @@
 package com.gthoya.configuration;
 
-import com.gthoya.util.CryptoComponent;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -50,16 +48,13 @@ public class DataSourceConfiguration {
     @Value("${jdbc.validationQueryTimeOut}")
     private int validationQueryTimeOut;
 
-    @Autowired
-    private CryptoComponent cryptoComponent;
-
     @Bean
     public DataSource dataSource() throws Exception {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
-        dataSource.setPassword(cryptoComponent.decrypt(password));
+        dataSource.setPassword(password);
         dataSource.setInitialSize(initialSize);
         dataSource.setMinIdle(minIdle);
         dataSource.setMaxIdle(maxIdle);

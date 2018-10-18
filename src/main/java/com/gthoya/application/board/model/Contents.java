@@ -1,6 +1,7 @@
 package com.gthoya.application.board.model;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class Contents {

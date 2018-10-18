@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -89,16 +88,5 @@ public class BoardController {
         mav.addObject("contents", (result != null ? result : new Contents()));
 
         return mav;
-    }
-
-    @PostMapping("/contents/upload/file")
-    @ResponseBody
-    public String uploadFile(MultipartFile attachFile) {
-        try {
-            return CommonConstant.SUCCESS;
-        } catch (Exception e) {
-            log.error("contents file upload error");
-            return CommonConstant.FAIL;
-        }
     }
 }
