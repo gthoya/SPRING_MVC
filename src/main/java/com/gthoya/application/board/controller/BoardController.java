@@ -44,6 +44,7 @@ public class BoardController {
     public String createContents(@LoginCheck User user, Contents contents) {
         try {
             contents.setCreateUser(user.getId());
+
             return boardService.createContents(contents);
         } catch (Exception e) {
             log.error("create contents error", e);
@@ -56,6 +57,7 @@ public class BoardController {
     public String modifyContents(@LoginCheck User user, Contents contents) {
         try {
             contents.setUpdateUser(user.getId());
+
             return boardService.modifyContents(contents);
         } catch (Exception e) {
             log.error("modify contents error", e);
@@ -69,6 +71,7 @@ public class BoardController {
         try {
             Contents contents = new Contents(id);
             contents.setUpdateUser(user.getId());
+
             return boardService.unusedContents(contents);
         } catch (Exception e) {
             log.error("unused contents error", e);

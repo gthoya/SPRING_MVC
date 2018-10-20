@@ -3,26 +3,28 @@
 <html>
 <head>
     <script type="text/javascript" src="/resources/js/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery/jquery.form.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#btnCreate").on("click", function() {
+            $("#btnCreate").on("click", function () {
                 if (window.confirm("등록 할거야?")) {
                     createContents()
                 }
             })
 
-            $("#btnModify").on("click", function() {
+            $("#btnModify").on("click", function () {
                 if (window.confirm("수정 할거야?")) {
+                    uploadFile()
                     modifyContents()
                 }
             })
 
-            $("#btnDelete").on("click", function() {
+            $("#btnDelete").on("click", function () {
                 if (window.confirm("삭제 할거야?")) {
                     deleteContents()
                 }
             })
-        });
+        })
 
         function createContents() {
             if (!validateContents()) {
@@ -90,10 +92,10 @@
     </div>
     <div style="width: 100%">
         <div style="float: left; border: 1px solid black; width: 5%">
-            <input type="text" id="contentsId" value="${contents.id}" readonly>
+            <input type="text" id="contentsId" value="${contents.id}" style="width: 100%" readonly>
         </div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 60%;">
-            <input type="text" id="contentsTitle" value="${contents.title}">
+            <input type="text" id="contentsTitle" value="${contents.title}" style="width: 100%">
         </div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createDateTime}</div>
         <div style="float: left; border: 1px solid black; border-left: 0px; width: 15%;">${contents.createUserName}</div>
