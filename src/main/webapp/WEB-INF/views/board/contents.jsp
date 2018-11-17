@@ -14,7 +14,6 @@
 
             $("#btnModify").on("click", function () {
                 if (window.confirm("수정 할거야?")) {
-                    uploadFile()
                     modifyContents()
                 }
             })

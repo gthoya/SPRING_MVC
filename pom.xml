@@ -14,11 +14,12 @@
         <source.encoding>UTF-8</source.encoding>
         <deploy.dir>deploy</deploy.dir>
         <build.war.name>ROOT</build.war.name>
-        <org.springframework.version>4.3.13.RELEASE</org.springframework.version>
+        <org.springframework.version>4.3.20.RELEASE</org.springframework.version>
         <org.aspectj.version>1.9.1</org.aspectj.version>
-        <jackson.version>2.5.1</jackson.version>
-        <jackson.asl.version>1.9.12</jackson.asl.version>
+        <jackson.version>2.9.7</jackson.version>
+        <jackson.asl.version>1.9.13</jackson.asl.version>
         <logback.version>1.2.3</logback.version>
+        <lombok.version>1.18.4</lombok.version>
         <tomcat.version>8.0.53</tomcat.version>
         <undertow.version>2.0.10.Final</undertow.version>
         <jetty.version>9.4.0.M1</jetty.version>
@@ -189,7 +190,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.20</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
